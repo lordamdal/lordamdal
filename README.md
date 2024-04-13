@@ -9,7 +9,7 @@
 
 - 👨‍💻 All of my projects are available at [https://ntsoft.us/](https://ntsoft.us/)
 
-- 💬 Ask me about **PHP, PYTHON,ML, Ai Chatbot, ERP, e-Banking, Web App Security, ISO 27001 Compliance**
+- 💬 Ask me about **Web Development, PHP, PYTHON, ML, Ai Chatbot, ERP, e-Banking, Cloud Computing, Web App Security, ISO 27001 Compliance**
 
 - 📫 How to reach me **ahmedali@ntsoft.us**
 
