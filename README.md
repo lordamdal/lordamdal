@@ -3,13 +3,13 @@
 
 - 🔭 I’m currently working on [My Corporate Office](https://mycorporate.space/)
 
-- 🌱 I’m currently learning **Machine Learning**
+- 🌱 My current Research Topic is **Machine Learning**
 
 - 👯 I’m looking to collaborate on [NotePost](https://notepost.cm/)
 
 - 👨‍💻 All of my projects are available at [https://ntsoft.us/](https://ntsoft.us/)
 
-- 💬 Ask me about **PHP, PYTHON,Ai Chatbot, ML, Web App Security**
+- 💬 Ask me about **PHP, PYTHON,ML, Ai Chatbot, ERP, e-Banking, Web App Security, ISO 27001 Compliance**
 
 - 📫 How to reach me **ahmedali@ntsoft.us**
 
