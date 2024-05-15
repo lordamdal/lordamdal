@@ -5,7 +5,7 @@
 
 - 🌱 My current Research Topic is **Machine Learning**
 
-- 👯 I’m looking to collaborate on [NotePost](https://notepost.cm/)
+- 👯 I’m looking to collaborate on [BarEyes 10.0 ](https://github.com/lordamdal/Bareyes/tree/main)
 
 - 👨‍💻 All of my projects are available at [https://ntsoft.us/](https://ntsoft.us/)
 
