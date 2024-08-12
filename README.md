@@ -1,15 +1,11 @@
 <h1 align="center">Hi 👋, I'm Ahmed Ali</h1>
 <h3 align="center">I'm a passionate software developer & Tech Entrepreneur</h3>
 
-- 🔭 I’m currently working on [My Corporate Office](https://mycorporate.space/)
+- 🔭 I’m currently working on Ai Voice Assistant Using Advanced NLP and RAGs
 
 - 🌱 My current Research Topic is **Machine Learning**
 
-- 👯 I’m looking to collaborate on [BarEyes 1.0 ](https://github.com/lordamdal/Bareyes/tree/main)
-
-- 👨‍💻 All of my projects are available at [https://ntsoft.us/](https://ntsoft.us/)
-
-- 💬 Ask me about **Web Development, PHP, PYTHON, ML, Ai Chatbot, ERP, e-Banking, Cloud Computing, Web App Security, ISO 27001 Compliance**
+- 💬 Ask me about **Machine Learning, Ai , Cloud Engineering, Web App & Flutter Mobile App Dev**
 
 - 📫 How to reach me **ahmedali@ntsoft.us**
 
