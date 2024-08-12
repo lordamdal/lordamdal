@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Ahmed Ali</h1>
-<h3 align="center">I'm a passionate software developer & Tech Entrepreneur</h3>
+<h3 align="center">I'm a passionate Coder </h3>
 
 - 🔭 I’m currently working on Ai Voice Assistant Using Advanced NLP and RAGs
 
