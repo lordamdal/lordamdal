@@ -1,11 +1,11 @@
 <h1 align="center">Hi 👋, I'm Ahmed Ali</h1>
 <h3 align="center">I'm a passionate Coder </h3>
 
-- 🔭 I’m currently working on Ai Voice Assistant Using Advanced NLP and RAGs
+- 🔭 I’m currently working on Real time ML Pipeline for generated video
 
-- 🌱 My current Research Topic is **Machine Learning**
+- 🌱 My current Research Topic is **Real-time Video-driven Facial Animation: A Deep Learning Approach to Avatar Lip Synchronization using 2D Video Samples"**
 
-- 💬 Ask me about **Machine Learning, Ai , Cloud Engineering, Web App & Flutter Mobile App Dev**
+- 💬 Ask me about **Deep Learning, Ai , Cloud Engineering, Web App & Flutter Mobile App Dev**
 
 - 📫 How to reach me **ahmedali@ntsoft.us**
 
