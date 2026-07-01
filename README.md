@@ -3,11 +3,11 @@
 
 - 🔭 I’m currently working on Real time ML Pipeline for generated video
 
-- 🌱 My current Research Topic is **Real-time Video-driven Facial Animation: A Deep Learning Approach to Avatar Lip Synchronization using 2D Video Samples"**
+- 🌱 My current Research Topic is **Low Latency Real-Time video Avatar with voice agent"**
 
 - 💬 Ask me about **Deep Learning, Ai , Cloud Engineering, Web App & Flutter Mobile App Dev**
 
-- 📫 How to reach me **ahmedali@ntsoft.us**
+- 📫 How to reach me **@lordamdal on discord or linkedin**
 
 - ⚡ Fun fact **Always Ready to work**
 
