@@ -5,7 +5,7 @@
 
 - 🌱 My current Research Topic is **Low Latency Real-Time video Avatar with voice agent"**
 
-- 💬 Ask me about **Deep Learning, Ai , Cloud Engineering, Web App & Flutter Mobile App Dev**
+- 💬 Ask me about **Deep Learning, Agentic Build and Computer Vision**
 
 - 📫 How to reach me **@lordamdal on discord or linkedin**
 
