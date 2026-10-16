@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1196" viewBox="0 0 1200 1196" role="img">
+<title>Now building: a web browser automation agent, AI inference cost optimisation, and a personal assistant agent</title>
+<defs>
+<filter id="edge" x="-25%" y="-25%" width="150%" height="150%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="11" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="17" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="4" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="torn" x="-10%" y="-30%" width="120%" height="160%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="7" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" stitchTiles="stitch" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.066  0 0 0 0 0.05  0.22 0 0 0 -0.08"/>
+</filter>
+<clipPath id="clip"><rect x="1.5" y="1.5" width="1197" height="1193" rx="18"/></clipPath></defs>
+<style>
+.sans { font-family: 'Helvetica Neue', Helvetica, Inter, 'Segoe UI', Arial, sans-serif; }
+.mono { font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; }
+.pre { white-space: pre; }
+@keyframes in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<g clip-path="url(#clip)">
+<rect width="1200" height="1196" fill="#f2ece0"/>
+
+<g transform="translate(940 -190) scale(0.62)" opacity="0.9">
+<path d="M300 44 C400 8 530 52 580 148 C632 248 618 372 528 448 C438 524 300 540 206 486 C104 428 44 316 62 208 C80 100 196 82 300 44 Z" fill="#efb63d" opacity=".82" filter="url(#soft)"/>
+<path d="M336 132 C412 108 486 158 502 236 C520 320 470 396 392 420 C310 446 224 404 202 330 C180 254 240 162 336 132 Z" fill="#e2603c" opacity=".8" filter="url(#edge)"/>
+<path d="M360 190 C420 176 470 214 474 266 C478 322 436 360 380 362 C322 364 290 322 292 272 C294 226 318 200 360 190 Z" fill="#cd4f7c" opacity=".7" filter="url(#edge)"/>
+</g>
+<g transform="translate(-330 896) scale(0.9)" opacity="0.5">
+<path d="M262 26 C368 6 458 84 478 186 C500 296 438 412 330 452 C218 494 92 440 54 340 C16 240 66 118 160 62 C196 40 222 34 262 26 Z" fill="#3ba0b2" filter="url(#soft)"/>
+</g>
+<g transform="rotate(-1.5 64 52)">
+<rect x="68" y="56" width="218" height="36" fill="#14110d"/>
+<rect x="64" y="52" width="218" height="36" fill="#fbf8f1" stroke="#14110d" stroke-width="2.5"/>
+<text x="81" y="75" class="mono" font-size="13" font-weight="700" letter-spacing="3.0" fill="#14110d">00 / NOW BUILDING</text>
+</g>
+<text id="n1" x="60" y="172" class="sans" font-size="66" font-weight="900" letter-spacing="-2.97" fill="#14110d" textLength="309.3" lengthAdjust="spacingAndGlyphs">ONE IDEA.</text>
+<text id="n2" x="60" y="238" class="sans" font-size="66" font-weight="900" letter-spacing="-2.97" fill="#14110d" textLength="492.2" lengthAdjust="spacingAndGlyphs">THREE WAYS IN.</text>
+<text x="62" y="292" class="sans" font-size="22" fill="#4a4239">The idea: AI that does <tspan font-weight="700" fill="#14110d">real work</tspan> for you — in your browser, across your week —</text>
+<text x="62" y="324" class="sans" font-size="22" fill="#4a4239">and costs little enough to run that you <tspan font-weight="700" fill="#14110d">actually leave it on.</tspan></text>
+
+<rect x="72" y="394" width="1056" height="214" fill="#14110d"/>
+<rect x="64" y="386" width="1056" height="214" fill="#fbf8f1" stroke="#14110d" stroke-width="3"/>
+<rect x="65.5" y="387.5" width="106.5" height="211" fill="#e2603c"/>
+<rect x="171" y="386" width="3" height="214" fill="#14110d"/>
+<text x="118" y="506" text-anchor="middle" class="mono" font-size="38" font-weight="700" fill="#fbf8f1">01</text>
+<rect x="204" y="370" width="253" height="32" rx="16" fill="#efb63d" stroke="#14110d" stroke-width="2.5"/>
+<text x="220" y="390.5" class="mono" font-size="12" font-weight="700" letter-spacing="2.4" fill="#14110d">LIVE · CHROMEBOOST.WORK</text>
+<text id="p0" x="204" y="462" class="sans" font-size="34" font-weight="900" letter-spacing="-1.20" fill="#14110d" textLength="594.8" lengthAdjust="spacingAndGlyphs">WEB BROWSER AUTOMATION AGENT</text>
+<text x="204" y="500" class="sans" font-size="20.5" fill="#4a4239">Gives Claude hands in your own Chrome — your logins, real clicks, real keystrokes.</text><text x="204" y="530" class="sans" font-size="20.5" fill="#4a4239">It reads, fills, drags and downloads; anything that posts, pays or deletes waits for you.</text>
+<rect x="204" y="548" width="113" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="261" y="569" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">MCP server</text><rect x="327" y="548" width="168" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="411" y="569" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">Chrome extension</text><rect x="505" y="548" width="122" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="567" y="569" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">Claude Code</text><rect x="638" y="548" width="177" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="726" y="569" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">Mac + Windows app</text><rect x="825" y="548" width="49" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="850" y="569" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">MIT</text>
+<rect x="72" y="660" width="1056" height="214" fill="#14110d"/>
+<rect x="64" y="652" width="1056" height="214" fill="#fbf8f1" stroke="#14110d" stroke-width="3"/>
+<rect x="65.5" y="653.5" width="106.5" height="211" fill="#efb63d"/>
+<rect x="171" y="652" width="3" height="214" fill="#14110d"/>
+<text x="118" y="772" text-anchor="middle" class="mono" font-size="38" font-weight="700" fill="#14110d">02</text>
+<rect x="204" y="636" width="128" height="32" rx="16" fill="#3ba0b2" stroke="#14110d" stroke-width="2.5"/>
+<text x="220" y="656.5" class="mono" font-size="12" font-weight="700" letter-spacing="2.4" fill="#14110d">IN THE LAB</text>
+<text id="p1" x="204" y="728" class="sans" font-size="34" font-weight="900" letter-spacing="-1.20" fill="#14110d" textLength="562.1" lengthAdjust="spacingAndGlyphs">AI INFERENCE COST OPTIMISATION</text>
+<text x="204" y="766" class="sans" font-size="20.5" fill="#4a4239">Same answers, smaller bill. Finding where model spend actually goes and cutting it —</text><text x="204" y="796" class="sans" font-size="20.5" fill="#4a4239">measured in cost per finished task, not cost per token, with quality held fixed.</text>
+<rect x="204" y="814" width="122" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="265" y="835" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">cost / task</text><rect x="336" y="814" width="86" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="379" y="835" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">latency</text><rect x="432" y="814" width="77" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="471" y="835" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">tokens</text><rect x="519" y="814" width="141" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="589" y="835" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">quality evals</text>
+<rect x="72" y="926" width="1056" height="214" fill="#14110d"/>
+<rect x="64" y="918" width="1056" height="214" fill="#fbf8f1" stroke="#14110d" stroke-width="3"/>
+<rect x="65.5" y="919.5" width="106.5" height="211" fill="#3ba0b2"/>
+<rect x="171" y="918" width="3" height="214" fill="#14110d"/>
+<text x="118" y="1038" text-anchor="middle" class="mono" font-size="38" font-weight="700" fill="#14110d">03</text>
+<rect x="204" y="902" width="109" height="32" rx="16" fill="#fbf8f1" stroke="#14110d" stroke-width="2.5"/>
+<text x="220" y="922.5" class="mono" font-size="12" font-weight="700" letter-spacing="2.4" fill="#14110d">BUILDING</text>
+<text id="p2" x="204" y="994" class="sans" font-size="34" font-weight="900" letter-spacing="-1.20" fill="#14110d" textLength="519.2" lengthAdjust="spacingAndGlyphs">PERSONAL ASSISTANT AI AGENT</text>
+<text x="204" y="1032" class="sans" font-size="20.5" fill="#4a4239">An assistant for the errands of a working week — the inbox, the calendar, the</text><text x="204" y="1062" class="sans" font-size="20.5" fill="#4a4239">follow-ups you'd forget. It does the legwork; you approve what leaves your name.</text>
+<rect x="204" y="1080" width="77" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="242" y="1101" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">memory</text><rect x="291" y="1080" width="95" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="338" y="1101" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">tool use</text><rect x="396" y="1080" width="113" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="452" y="1101" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">scheduling</text><rect x="519" y="1080" width="177" height="31" rx="5" fill="#e9e0cd" stroke="#14110d" stroke-width="1.5"/><text x="608" y="1101" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="#14110d">human in the loop</text>
+
+<rect width="1200" height="1196" filter="url(#grain)"/>
+</g>
+<rect x="1.5" y="1.5" width="1197" height="1193" rx="18" fill="none" stroke="#14110d" stroke-width="3"/>
+</svg>

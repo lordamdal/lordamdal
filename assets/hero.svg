@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img">
+<title>Ahmed Ali — agents that actually do the work</title>
+<defs>
+<filter id="edge" x="-25%" y="-25%" width="150%" height="150%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="11" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="17" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="4" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="torn" x="-10%" y="-30%" width="120%" height="160%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="7" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" stitchTiles="stitch" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.066  0 0 0 0 0.05  0.22 0 0 0 -0.08"/>
+</filter>
+<clipPath id="clip"><rect x="1.5" y="1.5" width="1197" height="627" rx="18"/></clipPath></defs>
+<style>
+.sans { font-family: 'Helvetica Neue', Helvetica, Inter, 'Segoe UI', Arial, sans-serif; }
+.mono { font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; }
+.pre { white-space: pre; }
+@keyframes in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+.l1 { animation: in .45s ease-out 1.05s backwards; }
+.l2 { animation: in .45s ease-out 1.60s backwards; }
+.l3 { animation: in .45s ease-out 2.15s backwards; }
+.l4 { animation: in .45s ease-out 2.70s backwards; }
+.caret { animation: blink 1.1s steps(1) infinite; }
+</style>
+<g clip-path="url(#clip)">
+<rect width="1200" height="630" fill="#f2ece0"/>
+
+<g transform="translate(-300 150) scale(1.0)" opacity="0.62">
+<path d="M262 26 C368 6 458 84 478 186 C500 296 438 412 330 452 C218 494 92 440 54 340 C16 240 66 118 160 62 C196 40 222 34 262 26 Z" fill="#3ba0b2" filter="url(#soft)"/>
+</g>
+<g transform="translate(690 -160) scale(0.92)" opacity="1.0">
+<path d="M300 44 C400 8 530 52 580 148 C632 248 618 372 528 448 C438 524 300 540 206 486 C104 428 44 316 62 208 C80 100 196 82 300 44 Z" fill="#efb63d" opacity=".82" filter="url(#soft)"/>
+<path d="M336 132 C412 108 486 158 502 236 C520 320 470 396 392 420 C310 446 224 404 202 330 C180 254 240 162 336 132 Z" fill="#e2603c" opacity=".8" filter="url(#edge)"/>
+<path d="M360 190 C420 176 470 214 474 266 C478 322 436 360 380 362 C322 364 290 322 292 272 C294 226 318 200 360 190 Z" fill="#cd4f7c" opacity=".7" filter="url(#edge)"/>
+</g>
+<g transform="translate(700 300) scale(1.0)">
+<path d="M234 18 C330 4 424 66 442 156 C462 252 396 330 296 342 C190 356 78 306 50 218 C24 134 108 40 234 18 Z" fill="#6a4dad" opacity=".5" filter="url(#soft)"/>
+<path d="M252 96 C316 86 366 128 368 184 C370 244 318 282 256 282 C194 282 148 240 150 184 C152 132 196 104 252 96 Z" fill="#2e7a58" opacity=".42" filter="url(#edge)"/>
+</g>
+<path d="M690 196 C740 186 790 200 840 188 S930 170 990 176" fill="none" stroke="#2d49ab" stroke-width="15" stroke-linecap="round" opacity=".5" filter="url(#edge)"/>
+<rect width="1200" height="76" fill="#f2ece0"/>
+
+<rect x="59" y="23" width="38" height="38" fill="#14110d"/>
+<rect x="56" y="20" width="38" height="38" fill="#efb63d" stroke="#14110d" stroke-width="2.5"/>
+<path d="M36 3 L12 36 h16 L26 61 L52 26 H35 Z" transform="translate(63 27) scale(.375)" fill="#14110d"/>
+<text x="108" y="48" class="sans" font-size="25" font-weight="700" letter-spacing="-.6" fill="#14110d">Ahmed Ali</text>
+<text x="1144" y="45" text-anchor="end" class="mono" font-size="14" font-weight="700" letter-spacing="2.4" fill="#14110d"><tspan dx="0">BROWSER AGENTS</tspan><tspan dx="30">INFERENCE</tspan><tspan dx="30">ASSISTANTS</tspan></text>
+<rect x="0" y="76" width="1200" height="3" fill="#14110d"/>
+
+<g transform="rotate(-2 64 130)">
+<rect x="68" y="116" width="360" height="34" fill="#14110d"/>
+<rect x="64" y="112" width="360" height="34" fill="#3ba0b2" stroke="#14110d" stroke-width="2.5"/>
+<path d="M36 3 L12 36 h16 L26 61 L52 26 H35 Z" transform="translate(79 120) scale(.28)" fill="#14110d"/>
+<text x="106" y="134" class="mono" font-size="13" font-weight="700" letter-spacing="2.6" fill="#14110d">AI ENGINEER · BUILDING AGENTS</text>
+</g>
+
+<text id="h1a" x="58" y="238" class="sans" font-size="88" font-weight="900" letter-spacing="-3.96" fill="#14110d" textLength="566" lengthAdjust="spacingAndGlyphs">AGENTS THAT</text>
+<rect x="48" y="252" width="448" height="83" fill="#e2603c" filter="url(#torn)"/><text id="h1b" x="58" y="322" class="sans" font-size="88" font-weight="900" letter-spacing="-3.96" fill="#fbf8f1" textLength="426.4" lengthAdjust="spacingAndGlyphs">ACTUALLY</text>
+<text id="h1c" x="510.4" y="322" class="sans" font-size="88" font-weight="900" letter-spacing="-3.96" fill="#14110d" textLength="125.8" lengthAdjust="spacingAndGlyphs">DO</text>
+<text id="h1d" x="58" y="406" class="sans" font-size="88" font-weight="900" letter-spacing="-3.96" fill="#14110d" textLength="467.9" lengthAdjust="spacingAndGlyphs">THE WORK.</text>
+<text x="60" y="466" class="sans" font-size="23" fill="#4a4239">Hi, I'm <tspan font-weight="700" fill="#14110d">Ahmed Ali</tspan>. I build AI agents that work in the</text><text x="60" y="500" class="sans" font-size="23" fill="#4a4239">software you already use — <tspan font-weight="700" fill="#14110d">your browser, your inbox,</tspan></text><text x="60" y="534" class="sans" font-size="23" fill="#4a4239"><tspan font-weight="700" fill="#14110d">your week</tspan> — and I make the models behind them</text><text x="60" y="568" class="sans" font-size="23" fill="#4a4239"><tspan font-weight="700" fill="#14110d">cheaper to run</tspan>, without making them any worse.</text>
+
+<rect x="706" y="266" width="458" height="262" fill="#14110d"/>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffcf5"/><stop offset="1" stop-color="#efe8f4"/></linearGradient>
+<rect x="698" y="258" width="458" height="262" fill="url(#glass)" stroke="#14110d" stroke-width="3"/>
+<rect x="698" y="258" width="458" height="44" fill="#14110d"/>
+<circle cx="722" cy="280" r="6" fill="#e2603c"/>
+<circle cx="740" cy="280" r="6" fill="#efb63d"/>
+<circle cx="758" cy="280" r="6" fill="#2e7a58"/>
+<text x="778" y="285" class="mono" font-size="12.5" font-weight="700" letter-spacing="2.6" fill="#fbf8f1">YOU → AHMED</text>
+<circle cx="1090" cy="280" r="4" fill="#efb63d"/>
+<circle cx="1104" cy="280" r="4" fill="#6b635a"/>
+<circle cx="1118" cy="280" r="4" fill="#6b635a"/>
+<circle cx="1132" cy="280" r="4" fill="#6b635a"/>
+<text class="mono l0" x="720" y="340" font-size="16" font-weight="700" fill="#14110d">› what are you building right now?</text><text class="mono l1" x="720" y="371" font-size="16" font-weight="400" fill="#4a4239">→ a browser agent that drives real Chrome</text><text class="mono l2" x="720" y="402" font-size="16" font-weight="400" fill="#4a4239">→ inference that costs less per task</text><text class="mono l3" x="720" y="433" font-size="16" font-weight="400" fill="#4a4239">→ an assistant that runs my week</text><text class="mono l4" x="720" y="464" font-size="16" font-weight="700" fill="#2e7a58">→ live at chromeboost.work ✓</text>
+<text x="720" y="495" class="mono" font-size="16" font-weight="700" fill="#14110d">›</text>
+<rect class="caret" x="740" y="481" width="10" height="18" fill="#14110d"/>
+
+<rect width="1200" height="630" filter="url(#grain)"/>
+</g>
+<rect x="1.5" y="1.5" width="1197" height="627" rx="18" fill="none" stroke="#14110d" stroke-width="3"/>
+</svg>
