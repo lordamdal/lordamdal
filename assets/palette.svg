@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1212" height="592" viewBox="0 0 1212 592" role="img">
+<title>The palette — tools I paint with: Python, PyTorch, TensorFlow, TypeScript, Node.js, React, Swift, Core ML, MCP, Claude Code; also Google Cloud (Certified), Aws, Azure, Docker, Kubernetes, Postgres, Mongodb</title>
+<defs><filter id="imp" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="580" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.06" numOctaves="4" seed="29" result="bristle"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="35" result="blob"/>
+  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
+  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
+  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
+  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
+  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
+  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
+  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
+  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
+  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
+  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
+  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
+</filter>
+<filter id="imp-v" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="580" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.06 0.012" numOctaves="4" seed="29" result="bristle"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="35" result="blob"/>
+  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
+  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
+  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
+  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
+  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
+  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
+  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
+  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
+  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
+  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
+  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
+</filter>
+<filter id="gouache" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="580" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="37" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="30" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.05 0.012" numOctaves="3" seed="30" result="streak"/>
+  <feColorMatrix in="streak" type="saturate" values="0" result="g"/>
+  <feComposite in="shape" in2="g" operator="arithmetic" k2="1" k3=".22" k4="-.11" result="mix"/>
+  <feComposite in="mix" in2="shape" operator="in"/>
+</filter>
+<filter id="torn" x="-5%" y="-30%" width="110%" height="160%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.18" numOctaves="2" seed="33" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="31" stitchTiles="stitch"/>
+  <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .22 0 0 0 -.07"/>
+</filter><clipPath id="wall"><rect x="2.5" y="2.5" width="1195" height="575" rx="18"/></clipPath></defs>
+<style>
+.poster { font-family: 'Helvetica Neue', 'Arial Narrow', Impact, Haettenschweiler, sans-serif; font-stretch: condensed; font-weight: 900; }
+.sans { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.bold { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; }
+.mono { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; }
+</style>
+<rect x="12" y="12" width="1200" height="580" rx="20" fill="#141414"/>
+<g clip-path="url(#wall)">
+<rect width="1200" height="580" fill="#1f3fd1"/>
+
+<g filter="url(#gouache)"><circle cx="1130" cy="40" r="170" fill="#7fd3ff"/><circle cx="60" cy="600" r="150" fill="#7b5cff"/></g>
+<text x="66" y="152" class="poster" font-size="124" fill="#141414" id="pal-shadow" textLength="649.6" lengthAdjust="spacingAndGlyphs">THE PALETTE</text>
+<text x="60" y="146" class="poster" font-size="124" fill="#fdf6e6" id="pal" textLength="649.6" lengthAdjust="spacingAndGlyphs">THE PALETTE</text>
+<g transform="rotate(-3 175.2 195.5)">
+<rect x="58.0" y="170.0" width="234.4" height="51" rx="10" fill="#fff"/>
+<rect x="69.0" y="181.0" width="222.4" height="39" rx="6" fill="#141414"/>
+<rect x="64.0" y="176.0" width="222.4" height="39" rx="6" fill="#ffd21f" stroke="#141414" stroke-width="3.5"/>
+<text x="80" y="200.9" class="bold" font-size="15" fill="#141414" letter-spacing="2.2" id="k-tools" textLength="190.4" lengthAdjust="spacingAndGlyphs">TOOLS I PAINT WITH</text>
+</g>
+<text x="64" y="284" class="mono" font-size="12" fill="#fdf6e6" letter-spacing="2">ALSO ON THE SHELF</text>
+<g transform="rotate(-2 143.0 317.0)">
+<rect x="58.0" y="294.0" width="170.0" height="46" rx="10" fill="#fff"/>
+<rect x="69.0" y="305.0" width="158.0" height="34" rx="6" fill="#141414"/>
+<rect x="64.0" y="300.0" width="158.0" height="34" rx="6" fill="#fdf6e6" stroke="#141414" stroke-width="3.5"/>
+<text x="76" y="321.68" class="bold" font-size="13" fill="#141414" letter-spacing="1" id="shelf0" textLength="134" lengthAdjust="spacingAndGlyphs">GOOGLE CLOUD ✓</text>
+</g><g transform="rotate(2 266.1 317.0)">
+<rect x="232.0" y="294.0" width="68.3" height="46" rx="10" fill="#fff"/>
+<rect x="243.0" y="305.0" width="56.3" height="34" rx="6" fill="#141414"/>
+<rect x="238.0" y="300.0" width="56.3" height="34" rx="6" fill="#ffd21f" stroke="#141414" stroke-width="3.5"/>
+<text x="250" y="321.68" class="bold" font-size="13" fill="#141414" letter-spacing="1" id="shelf1" textLength="32.3" lengthAdjust="spacingAndGlyphs">AWS</text>
+</g><g transform="rotate(-1 100.9 369.0)">
+<rect x="58.0" y="346.0" width="85.8" height="46" rx="10" fill="#fff"/>
+<rect x="69.0" y="357.0" width="73.8" height="34" rx="6" fill="#141414"/>
+<rect x="64.0" y="352.0" width="73.8" height="34" rx="6" fill="#7fd3ff" stroke="#141414" stroke-width="3.5"/>
+<text x="76" y="373.68" class="bold" font-size="13" fill="#141414" letter-spacing="1" id="shelf2" textLength="49.8" lengthAdjust="spacingAndGlyphs">AZURE</text>
+</g><g transform="rotate(1.5 197.1 369.0)">
+<rect x="147.8" y="346.0" width="98.6" height="46" rx="10" fill="#fff"/>
+<rect x="158.8" y="357.0" width="86.6" height="34" rx="6" fill="#141414"/>
+<rect x="153.8" y="352.0" width="86.6" height="34" rx="6" fill="#19c3a6" stroke="#141414" stroke-width="3.5"/>
+<text x="165.8" y="373.68" class="bold" font-size="13" fill="#141414" letter-spacing="1" id="shelf3" textLength="62.6" lengthAdjust="spacingAndGlyphs">DOCKER</text>
+</g><g transform="rotate(-2 125.4 421.0)">
+<rect x="58.0" y="398.0" width="134.8" height="46" rx="10" fill="#fff"/>
+<rect x="69.0" y="409.0" width="122.8" height="34" rx="6" fill="#141414"/>
+<rect x="64.0" y="404.0" width="122.8" height="34" rx="6" fill="#ff8fb6" stroke="#141414" stroke-width="3.5"/>
+<text x="76" y="425.68" class="bold" font-size="13" fill="#141414" letter-spacing="1" id="shelf4" textLength="98.8" lengthAdjust="spacingAndGlyphs">KUBERNETES</text>
+</g><g transform="rotate(2 254.5 421.0)">
+<rect x="196.8" y="398.0" width="115.3" height="46" rx="10" fill="#fff"/>
+<rect x="207.8" y="409.0" width="103.3" height="34" rx="6" fill="#141414"/>
+<rect x="202.8" y="404.0" width="103.3" height="34" rx="6" fill="#b6f03a" stroke="#141414" stroke-width="3.5"/>
+<text x="214.8" y="425.68" class="bold" font-size="13" fill="#141414" letter-spacing="1" id="shelf5" textLength="79.3" lengthAdjust="spacingAndGlyphs">POSTGRES</text>
+</g><g transform="rotate(-1 114.7 473.0)">
+<rect x="58.0" y="450.0" width="113.3" height="46" rx="10" fill="#fff"/>
+<rect x="69.0" y="461.0" width="101.3" height="34" rx="6" fill="#141414"/>
+<rect x="64.0" y="456.0" width="101.3" height="34" rx="6" fill="#ff8a1f" stroke="#141414" stroke-width="3.5"/>
+<text x="76" y="477.68" class="bold" font-size="13" fill="#141414" letter-spacing="1" id="shelf6" textLength="77.3" lengthAdjust="spacingAndGlyphs">MONGODB</text>
+</g>
+<path d="M340 380 C340 250 480 200 660 200 C870 200 1130 250 1140 370 C1150 490 990 545 830 535 C730 529 710 485 650 485 C590 485 570 545 480 545 C390 545 340 480 340 380 Z M430 420 a40 32 0 1 0 80 0 a40 32 0 1 0 -80 0 Z" transform="translate(12 12)" fill="#141414" fill-rule="evenodd"/>
+<path d="M340 380 C340 250 480 200 660 200 C870 200 1130 250 1140 370 C1150 490 990 545 830 535 C730 529 710 485 650 485 C590 485 570 545 480 545 C390 545 340 480 340 380 Z M430 420 a40 32 0 1 0 80 0 a40 32 0 1 0 -80 0 Z" fill="#f6ead2" stroke="#141414" stroke-width="6" fill-rule="evenodd"/>
+<g filter="url(#imp)"><path d="M700 330 C760 316 820 340 880 324" fill="none" stroke="#ff7a5c" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/><path d="M720 368 C790 356 850 380 920 362" fill="none" stroke="#8f7bff" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/><path d="M780 300 C820 292 860 300 900 292" fill="none" stroke="#ffe36b" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/><path d="M404 302 C414 290 428 292 438 304" fill="none" stroke="#ffd21f" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M532 248 C542 236 556 238 566 250" fill="none" stroke="#ff3b1f" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M674 234 C684 222 698 224 708 236" fill="none" stroke="#ff8a1f" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M820 242 C830 230 844 232 854 244" fill="none" stroke="#4d6bff" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M952 270 C962 258 976 260 986 272" fill="none" stroke="#19c3a6" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M1058 342 C1068 330 1082 332 1092 344" fill="none" stroke="#ff4f8b" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M1038 448 C1048 436 1062 438 1072 450" fill="none" stroke="#7b5cff" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M914 480 C924 468 938 470 948 482" fill="none" stroke="#b6f03a" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M774 472 C784 460 798 462 808 474" fill="none" stroke="#7fd3ff" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M624 422 C634 410 648 412 658 424" fill="none" stroke="#141414" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g transform="rotate(-4 420.0 345.0)">
+<rect x="380.5" y="324.0" width="79.0" height="42" rx="10" fill="#fff"/>
+<rect x="391.5" y="335.0" width="67.0" height="30" rx="6" fill="#141414"/>
+<rect x="386.5" y="330.0" width="67.0" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="396.5" y="349.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab0" textLength="47" lengthAdjust="spacingAndGlyphs">Python</text>
+</g><g transform="rotate(3 548.0 291.0)">
+<rect x="505.0" y="270.0" width="86.1" height="42" rx="10" fill="#fff"/>
+<rect x="516.0" y="281.0" width="74.1" height="30" rx="6" fill="#141414"/>
+<rect x="511.0" y="276.0" width="74.1" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="520.95" y="295.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab1" textLength="54.1" lengthAdjust="spacingAndGlyphs">PyTorch</text>
+</g><g transform="rotate(-2 690.0 277.0)">
+<rect x="635.4" y="256.0" width="109.2" height="42" rx="10" fill="#fff"/>
+<rect x="646.4" y="267.0" width="97.2" height="30" rx="6" fill="#141414"/>
+<rect x="641.4" y="262.0" width="97.2" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="651.4" y="281.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab2" textLength="77.2" lengthAdjust="spacingAndGlyphs">TensorFlow</text>
+</g><g transform="rotate(4 836.0 285.0)">
+<rect x="784.2" y="264.0" width="103.5" height="42" rx="10" fill="#fff"/>
+<rect x="795.2" y="275.0" width="91.5" height="30" rx="6" fill="#141414"/>
+<rect x="790.2" y="270.0" width="91.5" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="800.25" y="289.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab3" textLength="71.5" lengthAdjust="spacingAndGlyphs">TypeScript</text>
+</g><g transform="rotate(-4 968.0 313.0)">
+<rect x="926.3" y="292.0" width="83.4" height="42" rx="10" fill="#fff"/>
+<rect x="937.3" y="303.0" width="71.4" height="30" rx="6" fill="#141414"/>
+<rect x="932.3" y="298.0" width="71.4" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="942.3" y="317.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab4" textLength="51.4" lengthAdjust="spacingAndGlyphs">Node.js</text>
+</g><g transform="rotate(3 1074.0 385.0)">
+<rect x="1038.3" y="364.0" width="71.4" height="42" rx="10" fill="#fff"/>
+<rect x="1049.3" y="375.0" width="59.4" height="30" rx="6" fill="#141414"/>
+<rect x="1044.3" y="370.0" width="59.4" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="1054.3" y="389.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab5" textLength="39.4" lengthAdjust="spacingAndGlyphs">React</text>
+</g><g transform="rotate(-2 1054.0 491.0)">
+<rect x="1020.8" y="470.0" width="66.3" height="42" rx="10" fill="#fff"/>
+<rect x="1031.8" y="481.0" width="54.3" height="30" rx="6" fill="#141414"/>
+<rect x="1026.8" y="476.0" width="54.3" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="1036.85" y="495.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab6" textLength="34.3" lengthAdjust="spacingAndGlyphs">Swift</text>
+</g><g transform="rotate(4 930.0 523.0)">
+<rect x="885.4" y="502.0" width="89.2" height="42" rx="10" fill="#fff"/>
+<rect x="896.4" y="513.0" width="77.2" height="30" rx="6" fill="#141414"/>
+<rect x="891.4" y="508.0" width="77.2" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="901.4" y="527.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab7" textLength="57.2" lengthAdjust="spacingAndGlyphs">Core ML</text>
+</g><g transform="rotate(-4 790.0 515.0)">
+<rect x="758.0" y="494.0" width="63.9" height="42" rx="10" fill="#fff"/>
+<rect x="769.0" y="505.0" width="51.9" height="30" rx="6" fill="#141414"/>
+<rect x="764.0" y="500.0" width="51.9" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="774.05" y="519.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab8" textLength="31.9" lengthAdjust="spacingAndGlyphs">MCP</text>
+</g><g transform="rotate(3 640.0 465.0)">
+<rect x="580.6" y="444.0" width="118.8" height="42" rx="10" fill="#fff"/>
+<rect x="591.6" y="455.0" width="106.8" height="30" rx="6" fill="#141414"/>
+<rect x="586.6" y="450.0" width="106.8" height="30" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
+<text x="596.6" y="469.68" class="bold" font-size="13" fill="#fdf6e6" letter-spacing="0.6" id="dab9" textLength="86.8" lengthAdjust="spacingAndGlyphs">Claude Code</text>
+</g>
+
+<rect width="1200" height="580" filter="url(#grain)"/>
+</g>
+<rect x="2.5" y="2.5" width="1195" height="575" rx="18" fill="none" stroke="#141414" stroke-width="5"/>
+</svg>

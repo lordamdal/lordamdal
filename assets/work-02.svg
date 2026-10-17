@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1212" height="512" viewBox="0 0 1212 512" role="img">
+<title>02: Ai Inference Cost Optimisation — Python, models &amp; a pile of receipts. Same answers, smaller bill. Measuring cost per finished task, not per token — and cutting it without letting quality slip. In The Studio.</title>
+<defs><filter id="imp" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="500" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.06" numOctaves="4" seed="12" result="bristle"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="18" result="blob"/>
+  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
+  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
+  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
+  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
+  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
+  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
+  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
+  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
+  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
+  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
+  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
+</filter>
+<filter id="imp-v" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="500" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.06 0.012" numOctaves="4" seed="12" result="bristle"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="18" result="blob"/>
+  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
+  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
+  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
+  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
+  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
+  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
+  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
+  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
+  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
+  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
+  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
+</filter>
+<filter id="gouache" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="500" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="20" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="30" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.05 0.012" numOctaves="3" seed="13" result="streak"/>
+  <feColorMatrix in="streak" type="saturate" values="0" result="g"/>
+  <feComposite in="shape" in2="g" operator="arithmetic" k2="1" k3=".22" k4="-.11" result="mix"/>
+  <feComposite in="mix" in2="shape" operator="in"/>
+</filter>
+<filter id="torn" x="-5%" y="-30%" width="110%" height="160%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.18" numOctaves="2" seed="16" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="14" stitchTiles="stitch"/>
+  <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .22 0 0 0 -.07"/>
+</filter><clipPath id="wall"><rect x="2.5" y="2.5" width="1195" height="495" rx="18"/></clipPath></defs>
+<style>
+.poster { font-family: 'Helvetica Neue', 'Arial Narrow', Impact, Haettenschweiler, sans-serif; font-stretch: condensed; font-weight: 900; }
+.sans { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.bold { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; }
+.mono { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; }
+</style>
+<rect x="12" y="12" width="1200" height="500" rx="20" fill="#141414"/>
+<g clip-path="url(#wall)">
+<rect width="1200" height="500" fill="#7fd3ff"/>
+
+<g filter="url(#gouache)"><circle cx="628" cy="540" r="150" fill="#ff3b1f" fill-opacity=".85"/></g><g filter="url(#imp)"><path d="M34 34 C144 18 244 42 324 24" fill="none" stroke="#ffd21f" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="748" y="60" width="400" height="400" fill="#141414"/>
+<rect x="736" y="48" width="400" height="400" fill="#141414"/>
+<clipPath id="canvas"><rect x="754" y="66" width="364" height="364"/></clipPath>
+<g clip-path="url(#canvas)"><rect x="754" y="66" width="364" height="364" fill="#f7f0e1"/><g filter="url(#gouache)"><rect x="724" y="36" width="424" height="424" fill="#ffd21f"/></g><g filter="url(#imp-v)"><path d="M816 392 V186" fill="none" stroke="#ff3b1f" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/><path d="M896 392 V246" fill="none" stroke="#ff8a1f" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/><path d="M976 392 V306" fill="none" stroke="#ff4f8b" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/><path d="M1056 392 V356" fill="none" stroke="#19c3a6" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/></g><g filter="url(#imp)"><path d="M788 112 C894 116 1004 186 1084 302" fill="none" stroke="#141414" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><polygon points="1098.8,323.4 1065.9,314.5 1102.1,289.5" fill="#141414" stroke="#141414" stroke-width="6" stroke-linejoin="round"/><path d="M794 412 H1084" fill="none" stroke="#141414" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<rect x="74" y="72" width="604" height="376" rx="4" fill="#141414"/><rect x="64" y="62" width="604" height="376" rx="4" fill="#fffaf0" stroke="#141414" stroke-width="5"/>
+<g transform="rotate(-3 366.0 64)" filter="url(#torn)"><rect x="306.0" y="49" width="120" height="30" fill="#f2e6c4" fill-opacity=".9"/><rect x="306.0" y="49" width="120" height="30" fill="none" stroke="#fff" stroke-opacity=".35" stroke-dasharray="2 9"/></g>
+<text x="98" y="144" class="poster" font-size="58" fill="#141414" id="w1t0" textLength="461.9" lengthAdjust="spacingAndGlyphs">AI INFERENCE COST</text><text x="98" y="202" class="poster" font-size="58" fill="#141414" id="w1t1" textLength="333" lengthAdjust="spacingAndGlyphs">OPTIMISATION</text>
+<text x="100" y="244" class="mono" font-size="16" fill="#4a4540">Ahmed Ali, 2026</text>
+<text x="100" y="268" class="mono" font-size="16" fill="#4a4540" font-style="italic">Python, models &amp; a pile of receipts</text>
+<text x="100" y="308" class="sans" font-size="20" fill="#141414">Same answers, smaller bill. Measuring cost</text><text x="100" y="336" class="sans" font-size="20" fill="#141414">per finished task, not per token — and cutting</text><text x="100" y="364" class="sans" font-size="20" fill="#141414">it without letting quality slip.</text>
+<circle cx="110" cy="398" r="10" fill="none" stroke="#141414" stroke-width="2.5"/>
+<text x="130" y="404" class="bold" font-size="15" fill="#141414" letter-spacing="1.6">IN THE STUDIO</text>
+<circle cx="662" cy="66" r="44" fill="#fff"/>
+<circle cx="667" cy="71" r="38" fill="#141414"/>
+<circle cx="662" cy="66" r="38" fill="#ff3b1f" stroke="#141414" stroke-width="4"/>
+<text x="662" y="82" class="poster" font-size="44" fill="#fdf6e6" text-anchor="middle">02</text>
+
+<rect width="1200" height="500" filter="url(#grain)"/>
+</g>
+<rect x="2.5" y="2.5" width="1195" height="495" rx="18" fill="none" stroke="#141414" stroke-width="5"/>
+</svg>

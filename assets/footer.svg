@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1212" height="332" viewBox="0 0 1212 332" role="img">
+<title>Say hi — me@lordamdal.com, @theamdal on X, linkedin/lordamdal</title>
+<defs><filter id="imp" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="320" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.06" numOctaves="4" seed="41" result="bristle"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="47" result="blob"/>
+  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
+  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
+  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
+  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
+  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
+  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
+  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
+  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
+  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
+  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
+  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
+</filter>
+<filter id="imp-v" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="320" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.06 0.012" numOctaves="4" seed="41" result="bristle"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="47" result="blob"/>
+  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
+  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
+  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
+  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
+  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
+  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
+  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
+  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
+  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
+  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
+  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
+</filter>
+<filter id="gouache" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="320" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="49" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="30" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+  <feTurbulence type="fractalNoise" baseFrequency="0.05 0.012" numOctaves="3" seed="42" result="streak"/>
+  <feColorMatrix in="streak" type="saturate" values="0" result="g"/>
+  <feComposite in="shape" in2="g" operator="arithmetic" k2="1" k3=".22" k4="-.11" result="mix"/>
+  <feComposite in="mix" in2="shape" operator="in"/>
+</filter>
+<filter id="torn" x="-5%" y="-30%" width="110%" height="160%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.18" numOctaves="2" seed="45" result="t"/>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="43" stitchTiles="stitch"/>
+  <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .22 0 0 0 -.07"/>
+</filter><clipPath id="wall"><rect x="2.5" y="2.5" width="1195" height="315" rx="18"/></clipPath></defs>
+<style>
+.poster { font-family: 'Helvetica Neue', 'Arial Narrow', Impact, Haettenschweiler, sans-serif; font-stretch: condensed; font-weight: 900; }
+.sans { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.bold { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; }
+.mono { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; }
+</style>
+<rect x="12" y="12" width="1200" height="320" rx="20" fill="#141414"/>
+<g clip-path="url(#wall)">
+<rect width="1200" height="320" fill="#141414"/>
+
+<g filter="url(#gouache)"><circle cx="1190" cy="-10" r="100" fill="#19c3a6"/><circle cx="760" cy="350" r="70" fill="#7b5cff"/></g>
+<g filter="url(#imp)"><path d="M860 340 C940 250 1060 130 1240 70" fill="none" stroke="#ff3b1f" stroke-width="120" stroke-linecap="round" stroke-linejoin="round"/><path d="M1010 340 C1070 290 1150 262 1240 252" fill="none" stroke="#ffd21f" stroke-width="84" stroke-linecap="round" stroke-linejoin="round"/><path d="M900 46 C960 26 1040 36 1110 16" fill="none" stroke="#1f3fd1" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"/><path d="M800 120 C812 110 828 112 840 124" fill="none" stroke="#ff4f8b" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="56" y="200" class="poster" font-size="170" fill="#fdf6e6" id="hi" textLength="491.8" lengthAdjust="spacingAndGlyphs">SAY HI.</text>
+<text xml:space="preserve" x="60" y="262" class="mono" font-size="19" fill="#fdf6e6">me@lordamdal.com<tspan fill="#ffd21f">  ✶  </tspan>@theamdal on X<tspan fill="#ff8fb6">  ✶  </tspan>linkedin/lordamdal</text>
+
+<rect width="1200" height="320" filter="url(#grain)"/>
+</g>
+<rect x="2.5" y="2.5" width="1195" height="315" rx="18" fill="none" stroke="#141414" stroke-width="5"/>
+</svg>
