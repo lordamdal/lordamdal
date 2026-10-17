@@ -1,61 +1,54 @@
 #!/usr/bin/env python3
-"""Generates the SVG panels used by the profile README.
+"""Generates the SVG drawing sheets used by the profile README.
 
 GitHub strips CSS, fonts and scripts from READMEs, so every designed piece of the
-page is an SVG image instead. Edit the copy below and run:
+page is an SVG image instead. The concept is an engineering drawing set: sheet 01
+is the high-level design of the whole system, sheets 02-04 detail each part, and
+sheet 05 is the bill of materials and revision history. Edit the copy below and run:
 
     python3 assets/build.py
 """
+import math
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 OUT = Path(__file__).parent
 
-# Palette and type, lifted from chromeboost.work
-INK, INK_SOFT = "#14110d", "#4a4239"
-PAPER, PAPER_2, PAPER_3, CARD = "#f2ece0", "#e9e0cd", "#ded2ba", "#fbf8f1"
-CORAL, ULTRA, VIRIDIAN = "#e2603c", "#2d49ab", "#2e7a58"
-TEAL, NAPLES, ROSE, VIOLET = "#3ba0b2", "#efb63d", "#cd4f7c", "#6a4dad"
+BG = "#0f2d4a"
+LINE, MUTED, SOFT = "#e6eefa", "#8eaacb", "#c3d4ea"
+AMBER, RED = "#ffb547", "#ff6b5b"
 
-SANS = "'Helvetica Neue', Helvetica, Inter, 'Segoe UI', Arial, sans-serif"
-MONO = "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"
+DIN = "'DIN Alternate', 'DIN Condensed', Bahnschrift, 'D-DIN', 'Barlow Semi Condensed', 'Roboto Condensed', 'Arial Narrow', Arial, sans-serif"
+MONO = "'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, 'Liberation Mono', monospace"
+SANS = "'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif"
 
-BOLT = "M36 3 L12 36 h16 L26 61 L52 26 H35 Z"
+SHEETS = 5
 
-FILTERS = """
-<filter id="edge" x="-25%" y="-25%" width="150%" height="150%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="11" result="t"/>
-  <feDisplacementMap in="SourceGraphic" in2="t" scale="17" xChannelSelector="R" yChannelSelector="G"/>
-</filter>
-<filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="4" result="t"/>
-  <feDisplacementMap in="SourceGraphic" in2="t" scale="26" xChannelSelector="R" yChannelSelector="G"/>
-</filter>
-<filter id="torn" x="-10%" y="-30%" width="120%" height="160%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="7" result="t"/>
-  <feDisplacementMap in="SourceGraphic" in2="t" scale="9" xChannelSelector="R" yChannelSelector="G"/>
-</filter>
-<filter id="grain" x="0" y="0" width="100%" height="100%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" stitchTiles="stitch" result="n"/>
-  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.066  0 0 0 0 0.05  0.22 0 0 0 -0.08"/>
-</filter>
+DEFS = f"""
+<pattern id="minor" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#fff" stroke-opacity=".045"/></pattern>
+<pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="{LINE}" stroke-opacity=".3" stroke-width="1.5"/></pattern>
+<radialGradient id="vignette" cx=".5" cy=".4" r=".8"><stop offset="0" stop-color="#1a4a78" stop-opacity=".5"/><stop offset="1" stop-color="#05121f" stop-opacity=".55"/></radialGradient>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L10 5 L0 9 Z" fill="{LINE}"/></marker>
+<marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L10 5 L0 9 Z" fill="{RED}"/></marker>
+<marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L10 5 L0 9 Z" fill="{AMBER}"/></marker>
 """
 
 CSS = f"""
-.sans {{ font-family: {SANS}; }}
+.din {{ font-family: {DIN}; font-weight: 700; }}
 .mono {{ font-family: {MONO}; }}
-.pre {{ white-space: pre; }}
-@keyframes in {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
-@keyframes blink {{ 50% {{ opacity: 0; }} }}
-@media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
+.sans {{ font-family: {SANS}; }}
+.flow {{ stroke-dasharray: 6 7; animation: flow 1.1s linear infinite; }}
+@keyframes flow {{ to {{ stroke-dashoffset: -13; }} }}
+@media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} .pulse {{ display: none; }} }}
 """
 
-# Rendered widths of headline runs in Helvetica Neue, measured in Chrome. They are
-# pinned with textLength so other fonts (Arial on Windows) keep the same layout.
+# Rendered widths of DIN headings, measured in Chrome on macOS. They are pinned with
+# textLength so fallback fonts (Bahnschrift, Arial) keep the same layout.
 WIDTHS = {
-    "h1a": 566, "h1b": 426.4, "h1c": 125.8, "h1d": 467.9,
-    "n1": 309.3, "n2": 492.2, "p0": 594.8, "p1": 562.1, "p2": 519.2,
-    "t1": 513, "f1": 764.7, "f2": 321.5, "marquee": 1475,
+    "name": 486.5, "wip0": 298.3, "wip1": 284.3, "wip2": 268.5, "bx-c": 247.4, "bx-a": 255.8,
+    "bx-web": 225.4, "bx-b": 151.9, "tb-title": 245.3, "dA": 502.4, "dB": 478.8, "dC": 452.2,
+    "a-core": 113.4, "c-core": 81.8, "bom": 239.8, "rev": 131,
 }
 
 
@@ -63,349 +56,471 @@ def mono_w(text, size, ls=0.0):
     return len(text) * (size * 0.602 + ls)
 
 
-def pinned(key):
-    w = WIDTHS.get(key)
-    return f' textLength="{w}" lengthAdjust="spacingAndGlyphs"' if w else ""
+def text(x, y, s, size=14, cls="mono", fill=LINE, anchor=None, ls=None, key=None, extra=""):
+    attrs = f'x="{x:g}" y="{y:g}" class="{cls}" font-size="{size}" fill="{fill}"'
+    if anchor:
+        attrs += f' text-anchor="{anchor}"'
+    if ls is not None:
+        attrs += f' letter-spacing="{ls}"'
+    if key:
+        attrs += f' id="{key}"'
+        if key in WIDTHS:
+            attrs += f' textLength="{WIDTHS[key]}" lengthAdjust="spacingAndGlyphs"'
+    return f"<text {attrs}{extra}>{escape(s)}</text>"
 
 
-def svg(w, h, body, title, extra_css=""):
+def line(x1, y1, x2, y2, stroke=LINE, width=1.5, extra=""):
+    return f'<line x1="{x1:g}" y1="{y1:g}" x2="{x2:g}" y2="{y2:g}" stroke="{stroke}" stroke-width="{width}"{extra}/>'
+
+
+def flow(d, stroke=LINE, marker="arrow"):
+    return f'<path d="{d}" fill="none" stroke="{stroke}" stroke-width="1.6" class="flow" marker-end="url(#{marker})"/>'
+
+
+def pulse(d, dur, color=AMBER, begin="0s"):
+    return (f'<circle class="pulse" r="4.5" fill="{color}"><animateMotion dur="{dur}" begin="{begin}" '
+            f'repeatCount="indefinite" path="{d}"/></circle>')
+
+
+def bubble(cx, cy, letter, r=14, size=14):
+    """Detail callout: the circled letter that points to another sheet."""
+    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{BG}" stroke="{LINE}" stroke-width="1.5"/>'
+            + text(cx, cy + size * 0.36, letter, size, "din", anchor="middle"))
+
+
+def box(x, y, w, h, title, sub=None, ref=None, key=None):
+    out = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{BG}" stroke="{LINE}" stroke-width="1.6"/>'
+    out += text(x + 20, y + (32 if sub else h / 2 + 7), title, 19, "din", key=key)
+    if sub:
+        out += text(x + 20, y + 56, sub, 12.5, fill=MUTED, ls=0.4)
+    if ref:
+        out += bubble(x + w, y, ref)
+    return out
+
+
+def node(cx, cy, label, w=120, h=38, stroke=LINE, size=16):
+    return (f'<rect x="{cx - w / 2:g}" y="{cy - h / 2:g}" width="{w}" height="{h}" fill="{BG}" stroke="{stroke}" stroke-width="1.5"/>'
+            + text(cx, cy + size * 0.36, label, size, "din", anchor="middle", fill=stroke))
+
+
+def diamond(cx, cy, r=20, stroke=RED):
+    return (f'<path d="M{cx} {cy - r} L{cx + r} {cy} L{cx} {cy + r} L{cx - r} {cy} Z" fill="{BG}" stroke="{stroke}" stroke-width="2"/>'
+            + text(cx, cy + 5, "?", 14, "din", anchor="middle", fill=stroke))
+
+
+def frame(w, h, zones=True):
+    """Sheet border with the lettered and numbered zone bands of a drawing."""
+    o, i = 12, 32
+    out = [
+        f'<rect x="{o}" y="{o}" width="{w - 2 * o}" height="{h - 2 * o}" fill="none" stroke="{LINE}" stroke-width="2"/>',
+        f'<rect x="{i}" y="{i}" width="{w - 2 * i}" height="{h - 2 * i}" fill="none" stroke="{LINE}" stroke-width="1" stroke-opacity=".8"/>',
+    ]
+    if not zones:
+        return "".join(out)
+    cols, rows = 6, max(2, round(h / 200))
+    cw, rh = (w - 2 * i) / cols, (h - 2 * i) / rows
+    for c in range(cols):
+        cx = i + cw * (c + 0.5)
+        for y in (o + 14, h - o - 6):
+            out.append(text(cx, y, str(c + 1), 10, fill=MUTED, anchor="middle"))
+        if c:
+            x = i + cw * c
+            out += [line(x, o, x, i, MUTED, 1), line(x, h - i, x, h - o, MUTED, 1)]
+    for r in range(rows):
+        cy = i + rh * (r + 0.5) + 4
+        for x in (o + 10, w - o - 10):
+            out.append(text(x, cy, "ABCDEFGH"[r], 10, fill=MUTED, anchor="middle"))
+        if r:
+            y = i + rh * r
+            out += [line(o, y, i, y, MUTED, 1), line(w - i, y, w - o, y, MUTED, 1)]
+    return "".join(out)
+
+
+def sheet(w, h, body, title, zones=True):
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img">
 <title>{escape(title)}</title>
-<defs>{FILTERS}<clipPath id="clip"><rect x="1.5" y="1.5" width="{w - 3}" height="{h - 3}" rx="18"/></clipPath></defs>
-<style>{CSS}{extra_css}</style>
+<defs>{DEFS}<clipPath id="clip"><rect width="{w}" height="{h}" rx="14"/></clipPath></defs>
+<style>{CSS}</style>
+<g clip-path="url(#clip)">
+<rect width="{w}" height="{h}" fill="{BG}"/>
+<rect width="{w}" height="{h}" fill="url(#minor)"/>
+<rect width="{w}" height="{h}" fill="url(#major)"/>
+<rect width="{w}" height="{h}" fill="url(#vignette)"/>
+{frame(w, h, zones)}
+{body}
+</g>
+</svg>
+"""
+
+
+# ---------------------------------------------------------------- sheet 01: high-level design
+
+WIP = [
+    ("A", "WEB BROWSER AUTOMATION AGENT", "chromeboost.work", "IN SERVICE"),
+    ("B", "AI INFERENCE COST OPTIMISATION", "cost per task ↓, quality held", "IN DEVELOPMENT"),
+    ("C", "PERSONAL ASSISTANT AI AGENT", "inbox · calendar · follow-ups", "IN DEVELOPMENT"),
+]
+
+
+def status(x, y, s, size=12, anchor=None):
+    live = s == "IN SERVICE"
+    return text(x, y, ("● " if live else "○ ") + s, size, fill=AMBER if live else SOFT, ls=1.4, anchor=anchor)
+
+
+def hero():
+    W, H = 1200, 740
+    b = [
+        text(60, 72, "HLD-001  ·  HIGH-LEVEL DESIGN", 12, fill=MUTED, ls=2.4, extra=' xml:space="preserve"'),
+        text(1140, 72, "GITHUB.COM/LORDAMDAL", 12, fill=MUTED, ls=2.4, anchor="end"),
+    ]
+
+    # The name, dimensioned like a part on a drawing
+    name_w = WIDTHS.get("name", 520)
+    x0, x1, dy = 62, 62 + name_w, 106
+    label = "AI ENGINEER"
+    gap = mono_w(label, 13, 2.4) / 2 + 14
+    mid = (x0 + x1) / 2
+    b += [
+        line(x0, 94, x0, 118, MUTED, 1), line(x1, 94, x1, 118, MUTED, 1),
+        f'<path d="M{mid - gap:g} {dy} H{x0 + 1}" stroke="{LINE}" stroke-width="1.2" marker-end="url(#arrow)"/>',
+        f'<path d="M{mid + gap:g} {dy} H{x1 - 1}" stroke="{LINE}" stroke-width="1.2" marker-end="url(#arrow)"/>',
+        text(mid, dy + 4.5, label, 13, fill=LINE, ls=2.4, anchor="middle"),
+        text(58, 202, "AHMED ALI", 100, "din", key="name"),
+        text(62, 242, "AGENT SYSTEMS  ·  INFERENCE ECONOMICS", 15, fill=AMBER, ls=3, extra=' xml:space="preserve"'),
+    ]
+    for j, s in enumerate([
+        "I design and build AI agents that do real work in the",
+        "real world — in your browser, across your week — and the",
+        "inference layer that makes them cheap enough to leave on.",
+    ]):
+        b.append(text(62, 286 + j * 28, s, 20, "sans", fill=SOFT))
+
+    # Work-in-progress schedule
+    b += [
+        text(72, 390, "REF", 11, fill=MUTED, ls=1.6), text(124, 390, "WORK IN PROGRESS", 11, fill=MUTED, ls=1.6),
+        text(456, 390, "STATUS", 11, fill=MUTED, ls=1.6), line(60, 400, 600, 400, LINE, 1.2),
+    ]
+    for r, (ref, item, sub, st) in enumerate(WIP):
+        y = 400 + r * 52
+        b += [
+            bubble(90, y + 26, ref, r=13, size=13),
+            text(124, y + 25, item, 19, "din", key=f"wip{r}"),
+            text(124, y + 43, sub, 12, fill=MUTED, ls=0.3),
+            status(456, y + 31, st),
+            line(60, y + 52, 600, y + 52, LINE, 1, ' stroke-opacity=".35"'),
+        ]
+
+    # Fig. 1: the system
+    b += [
+        f'<circle cx="706" cy="150" r="34" fill="{BG}" stroke="{LINE}" stroke-width="1.6"/>',
+        text(706, 157, "YOU", 18, "din", anchor="middle"),
+        box(820, 112, 320, 76, "PERSONAL ASSISTANT AGENT", "plans · remembers · schedules", "C", "bx-c"),
+        box(820, 248, 320, 76, "BROWSER AUTOMATION AGENT", "observe · act · verify", "A", "bx-a"),
+        f'<rect x="820" y="420" width="320" height="50" fill="{BG}" stroke="{LINE}" stroke-width="1.6"/>',
+        '<rect x="820" y="420" width="320" height="50" fill="url(#hatch)"/>',
+        f'<rect x="840" y="432" width="280" height="26" fill="{BG}"/>',
+        text(980, 451, "THE WEB · YOUR OWN CHROME", 17, "din", anchor="middle", key="bx-web"),
+        f'<rect x="650" y="500" width="490" height="56" fill="{BG}" stroke="{LINE}" stroke-width="1.6"/>',
+        f'<rect x="654" y="504" width="482" height="48" fill="none" stroke="{LINE}" stroke-width=".8" stroke-opacity=".5"/>',
+        text(800, 527, "INFERENCE LAYER", 19, "din", key="bx-b"),
+        text(800, 545, "cost per task ↓ · quality held fixed", 12.5, fill=MUTED, ls=0.4),
+        bubble(1140, 500, "B"),
+        diamond(980, 372),
+        text(1012, 377, "you approve", 12.5, fill=RED, ls=0.4),
+        flow("M740 150 H818"), text(779, 140, "intent", 12, fill=MUTED, anchor="middle"),
+        flow("M980 188 V246"), text(992, 222, "web tasks", 12, fill=MUTED),
+        flow("M980 324 V349"), flow("M980 393 V418"),
+        flow("M780 500 V174 H818"), flow("M780 300 H818"),
+        text(770, 420, "model calls", 12, fill=MUTED, anchor="middle", extra=' transform="rotate(-90 770 420)"'),
+        pulse("M740 150 H818 M980 188 V246 M980 324 V349 M980 393 V418", "3.2s"),
+        pulse("M780 500 V174 H818", "2.6s", begin="1.2s"),
+        text(650, 582, "FIG. 1 — ONE SYSTEM, THREE PARTS", 11, fill=MUTED, ls=1.6),
+    ]
+
+    # Legend
+    b += [
+        f'<rect x="60" y="596" width="410" height="92" fill="{BG}" fill-opacity=".6" stroke="{LINE}" stroke-width="1" stroke-opacity=".6"/>',
+        text(74, 616, "LEGEND", 11, fill=MUTED, ls=1.6),
+        line(74, 641, 112, 641, LINE, 1.6), text(124, 646, "component", 13, fill=SOFT),
+        f'<path d="M74 669 H112" stroke="{LINE}" stroke-width="1.6" class="flow"/>', text(124, 674, "intent / data flow", 13, fill=SOFT),
+        f'<path d="M292 629 L304 641 L292 653 L280 641 Z" fill="none" stroke="{RED}" stroke-width="1.8"/>', text(316, 646, "human approval", 13, fill=SOFT),
+        f'<rect x="280" y="661" width="24" height="16" fill="url(#hatch)" stroke="{LINE}" stroke-width="1"/>', text(316, 674, "external system", 13, fill=SOFT),
+    ]
+
+    # Title block
+    cells = [
+        (690, 590, 330, 50, "TITLE", "AGENTS THAT DO REAL WORK", "din", 19),
+        (1020, 590, 148, 50, "SHEET", f"01 / {SHEETS:02d}", "din", 19),
+        (690, 640, 110, 68, "DRAWN", "A. ALI", "mono", 15),
+        (800, 640, 220, 68, "CONTACT", "me@lordamdal.com", "mono", 15),
+        (1020, 640, 70, 68, "REV", "C", "din", 19),
+        (1090, 640, 78, 68, "YEAR", "2026", "mono", 15),
+    ]
+    b.append(f'<rect x="690" y="590" width="478" height="118" fill="{BG}" stroke="{LINE}" stroke-width="1.6"/>')
+    for x, y, w, h, lab, val, cls, size in cells:
+        b += [
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="none" stroke="{LINE}" stroke-width="1"/>',
+            text(x + 12, y + 16, lab, 10, fill=MUTED, ls=1.5),
+            text(x + 12, y + h - 13, val, size, cls, key="tb-title" if lab == "TITLE" else None),
+        ]
+    return sheet(W, H, "\n".join(b), "Ahmed Ali, AI engineer. High-level design: you, a personal assistant agent, a browser automation agent and the web, all running on a cost-optimised inference layer")
+
+
+# ---------------------------------------------------------------- sheets 02-04: details
+
+def detail(ref, n, title, st, notes, drawing):
+    W, H = 1200, 440
+    b = [
+        bubble(88, 94, ref, r=22, size=22),
+        text(126, 80, f"DETAIL {ref}  ·  SHEET {n:02d} / {SHEETS:02d}", 12, fill=MUTED, ls=2.2, extra=' xml:space="preserve"'),
+        text(124, 114, title, 32, "din", key=f"d{ref}"),
+        status(1140, 100, st, 13, anchor="end"),
+        line(60, 134, 1140, 134, LINE, 1, ' stroke-opacity=".5"'),
+        line(630, 160, 630, 392, LINE, 1, ' stroke-opacity=".25" stroke-dasharray="2 5"'),
+        text(660, 180, "NOTES", 11, fill=MUTED, ls=1.6),
+    ]
+    for j, s in enumerate(notes):
+        y = 214 + j * 34
+        b += [text(660, y, f"{j + 1}.", 15, fill=AMBER), text(690, y, s, 15, fill=LINE)]
+    b.append(drawing)
+    return sheet(W, H, "\n".join(b), f"Detail {ref}: {title.title()}. " + " ".join(notes))
+
+
+def ellipse_pt(cx, cy, rx, ry, deg):
+    a = math.radians(deg)
+    return cx + rx * math.cos(a), cy + ry * math.sin(a)
+
+
+def drawing_a():
+    cx, cy, rx, ry = 330, 282, 200, 86
+    steps = [(180, "OBSERVE"), (270, "PLAN"), (360, "ACT"), (450, "VERIFY")]
+    out = []
+    for k, (deg, _) in enumerate(steps):
+        nxt = steps[(k + 1) % 4][0] + (360 if k == 3 else 0)
+        pad = lambda d: 18 if d % 180 == 0 else 22
+        (x0, y0), (x1, y1) = ellipse_pt(cx, cy, rx, ry, deg + pad(deg)), ellipse_pt(cx, cy, rx, ry, nxt - pad(nxt))
+        out.append(flow(f"M{x0:.1f} {y0:.1f} A{rx} {ry} 0 0 1 {x1:.1f} {y1:.1f}"))
+    for deg, label in steps:
+        x, y = ellipse_pt(cx, cy, rx, ry, deg)
+        out.append(node(x, y, label))
+    out += [
+        text(cx, cy - 4, "YOUR CHROME", 18, "din", anchor="middle", key="a-core"),
+        text(cx, cy + 18, "your logins · your profile", 12, fill=MUTED, anchor="middle"),
+        pulse(f"M{cx - rx} {cy} A{rx} {ry} 0 1 1 {cx + rx} {cy} A{rx} {ry} 0 1 1 {cx - rx} {cy}", "7s"),
+        flow(f"M{cx + rx} {cy + 19} V{cy + 62}", RED, "arrow-red"),
+        diamond(cx + rx, cy + 84),
+        text(cx + rx + 10, cy + 45, "irreversible", 12, fill=RED),
+        text(cx + rx + 28, cy + 89, "you click", 12, fill=RED),
+    ]
+    return "".join(out)
+
+
+def bezier_y_at(p, x):
+    """y on a cubic bezier (control points p) at a given x, by bisection on t."""
+    weights = lambda t: ((1 - t) ** 3, 3 * t * (1 - t) ** 2, 3 * t * t * (1 - t), t ** 3)
+    lo, hi = 0.0, 1.0
+    for _ in range(40):
+        t = (lo + hi) / 2
+        lo, hi = (t, hi) if sum(c[0] * w for c, w in zip(p, weights(t))) < x else (lo, t)
+    return sum(c[1] * w for c, w in zip(p, weights((lo + hi) / 2)))
+
+
+def drawing_b():
+    ox, oy, top, right = 110, 368, 160, 584
+    today = [(140, 346), (300, 336), (430, 296), (540, 172)]
+    target = [(140, 356), (320, 351), (450, 331), (540, 268)]
+    px = 470
+    y0, y1 = bezier_y_at(today, px), bezier_y_at(target, px)
+    curve = lambda p: "M{} {} C{} {} {} {} {} {}".format(*[v for pt in p for v in pt])
+    return "".join([
+        f'<path d="M{ox} {oy} V{top}" stroke="{LINE}" stroke-width="1.6" marker-end="url(#arrow)"/>',
+        f'<path d="M{ox} {oy} H{right}" stroke="{LINE}" stroke-width="1.6" marker-end="url(#arrow)"/>',
+        text(ox + 12, top + 8, "COST / TASK", 12, fill=MUTED, ls=1.4),
+        text(right, oy - 12, "QUALITY", 12, fill=MUTED, ls=1.4, anchor="end"),
+        f'<path d="{curve(today)}" fill="none" stroke="{LINE}" stroke-width="2"/>',
+        text(550, 176, "today", 12.5, fill=SOFT),
+        f'<path d="{curve(target)}" fill="none" stroke="{AMBER}" stroke-width="2" class="flow"/>',
+        text(550, 272, "target", 12.5, fill=AMBER),
+        line(px, y0, px, oy, MUTED, 1, ' stroke-dasharray="3 4"'),
+        text(px, oy + 20, "same quality", 12, fill=MUTED, anchor="middle"),
+        line(px - 40, y0, px - 8, y0, MUTED, 1), line(px - 40, y1, px - 8, y1, MUTED, 1),
+        f'<path d="M{px - 32} {y0 + 1:.1f} V{y1 - 1:.1f}" stroke="{AMBER}" stroke-width="1.4" marker-start="url(#arrow-amber)" marker-end="url(#arrow-amber)"/>',
+        text(px - 44, round((y0 + y1) / 2 + 5, 1), "Δ cost", 13, fill=AMBER, anchor="end"),
+        f'<circle cx="{px}" cy="{y0:.1f}" r="6" fill="{BG}" stroke="{LINE}" stroke-width="2"/>',
+        f'<circle cx="{px}" cy="{y1:.1f}" r="6" fill="{BG}" stroke="{AMBER}" stroke-width="2"/>',
+        f'<circle class="pulse" cx="{px}" cy="{y0:.1f}" r="4.5" fill="{AMBER}"><animate attributeName="cy" '
+        f'values="{y0:.1f};{y0:.1f};{y1:.1f};{y1:.1f}" keyTimes="0;.3;.7;1" dur="4s" repeatCount="indefinite"/></circle>',
+    ])
+
+
+def drawing_c():
+    cx, cy, rx, ry, r = 330, 282, 220, 100, 50
+    bw, bh = 128, 34
+    spokes = [
+        (180, "INBOX", LINE), (-120, "CALENDAR", LINE), (-60, "MEMORY", LINE),
+        (0, "FOLLOW-UPS", LINE), (60, "WEB → DETAIL A", LINE), (120, "YOU APPROVE", RED),
+    ]
+    out = []
+    for deg, label, color in spokes:
+        x, y = ellipse_pt(cx, cy, rx, ry, deg)
+        a = math.radians(deg)
+        sx, sy = cx + (r + 4) * math.cos(a), cy + (r + 4) * math.sin(a)
+        # stop the spoke just outside the satellite box
+        k = min(abs((bw / 2 + 2) / (x - sx)) if abs(x - sx) > 1e-6 else 9,
+                abs((bh / 2 + 2) / (y - sy)) if abs(y - sy) > 1e-6 else 9)
+        ex, ey = x - (x - sx) * k, y - (y - sy) * k
+        out.append(flow(f"M{sx:.1f} {sy:.1f} L{ex:.1f} {ey:.1f}", color, "arrow-red" if color == RED else "arrow"))
+    for deg, label, color in spokes:
+        x, y = ellipse_pt(cx, cy, rx, ry, deg)
+        if label.startswith("WEB"):
+            out.append(f'<rect x="{x - bw / 2:g}" y="{y - bh / 2:g}" width="{bw}" height="{bh}" fill="{BG}"/>'
+                       f'<rect x="{x - bw / 2:g}" y="{y - bh / 2:g}" width="{bw}" height="{bh}" fill="url(#hatch)" stroke="{LINE}" stroke-width="1.5"/>'
+                       f'<rect x="{x - bw / 2 + 6:g}" y="{y - 10:g}" width="{bw - 12}" height="20" fill="{BG}"/>'
+                       + text(x, y + 5.4, label, 15, "din", anchor="middle"))
+        else:
+            out.append(node(x, y, label, w=bw, h=bh, stroke=color, size=15))
+    out += [
+        f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{BG}" stroke="{LINE}" stroke-width="1.6"/>',
+        f'<circle cx="{cx}" cy="{cy}" r="{r - 5}" fill="none" stroke="{LINE}" stroke-width=".8" stroke-opacity=".5"/>',
+        text(cx, cy + 2, "ASSISTANT", 17, "din", anchor="middle", key="c-core"),
+        text(cx, cy + 20, "runs on B", 11, fill=MUTED, anchor="middle"),
+    ]
+    return "".join(out)
+
+
+DETAILS = [
+    ("A", 2, "WEB BROWSER AUTOMATION AGENT", "IN SERVICE", [
+        "Drives your real, logged-in Chrome.",
+        "Real input: pointer paths, keystrokes, drag.",
+        "Checks what's on top before it clicks.",
+        "Posts, payments and deletes wait for your click.",
+        "Open source (MIT) · chromeboost.work",
+    ], drawing_a),
+    ("B", 3, "AI INFERENCE COST OPTIMISATION", "IN DEVELOPMENT", [
+        "Measure cost per finished task, not per token.",
+        "Find where model spend actually goes first.",
+        "Hold quality fixed with evals, then cut cost.",
+        "Goal: agents cheap enough to leave running.",
+    ], drawing_b),
+    ("C", 4, "PERSONAL ASSISTANT AI AGENT", "IN DEVELOPMENT", [
+        "Runs the errands of a working week.",
+        "Inbox, calendar, and the follow-ups you forget.",
+        "Remembers context so you don't repeat yourself.",
+        "Hands web work to the browser agent (A).",
+        "Runs on the cost-optimised inference layer (B).",
+        "Drafts everything; you approve what goes out.",
+    ], drawing_c),
+]
+
+
+# ---------------------------------------------------------------- sheet 05: BOM + revisions
+
+BOM = [
+    ("Python · PyTorch · TensorFlow", "models, training, pipelines"),
+    ("TypeScript · Node.js · React", "agents, extensions, apps"),
+    ("MCP · Claude Code", "tool protocols, agent harnesses"),
+    ("Swift · Core ML · Flutter", "on-device & mobile"),
+    ("Google Cloud ✓ · AWS · Azure", "cloud infrastructure"),
+    ("Docker · Kubernetes", "deploy & scale"),
+    ("PostgreSQL · MongoDB", "data"),
+]
+
+REVISIONS = [
+    ("A", ["Deep learning & computer vision"]),
+    ("B", ["Real-time video avatars with", "voice agents"]),
+    ("C", ["Browser agents, inference cost", "& personal assistants"]),
+]
+
+
+def cloud(x, y, w, h, step=22):
+    """Red-pencil revision cloud: scallops traced clockwise around a rectangle."""
+    d = [f"M{x} {y}"]
+    for (x0, y0), (x1, y1) in [((x, y), (x + w, y)), ((x + w, y), (x + w, y + h)),
+                               ((x + w, y + h), (x, y + h)), ((x, y + h), (x, y))]:
+        length = math.hypot(x1 - x0, y1 - y0)
+        n = max(1, round(length / step))
+        for k in range(1, n + 1):
+            d.append(f"A{length / n / 2:.1f} {length / n / 2:.1f} 0 0 1 {x0 + (x1 - x0) * k / n:.1f} {y0 + (y1 - y0) * k / n:.1f}")
+    return f'<path d="{" ".join(d)}" fill="none" stroke="{RED}" stroke-width="1.6" stroke-linejoin="round"/>'
+
+
+def bom():
+    W, H = 1200, 470
+    b = [
+        text(60, 72, f"SHEET {SHEETS:02d} / {SHEETS:02d}", 12, fill=MUTED, ls=2.2),
+        text(60, 112, "BILL OF MATERIALS", 28, "din", key="bom"),
+        text(72, 146, "ITEM", 11, fill=MUTED, ls=1.6), text(120, 146, "COMPONENT", 11, fill=MUTED, ls=1.6),
+        text(420, 146, "USED FOR", 11, fill=MUTED, ls=1.6), line(60, 156, 700, 156, LINE, 1.2),
+        text(770, 112, "REVISIONS", 28, "din", key="rev"),
+        text(784, 146, "REV", 11, fill=MUTED, ls=1.6), text(830, 146, "DESCRIPTION", 11, fill=MUTED, ls=1.6),
+        line(770, 156, 1140, 156, LINE, 1.2),
+    ]
+    for r, (part, use) in enumerate(BOM):
+        y = 156 + r * 38
+        b += [
+            text(72, y + 25, f"{r + 1:02d}", 14, fill=MUTED),
+            text(120, y + 25, part, 15),
+            text(420, y + 25, use, 14, fill=SOFT),
+            line(60, y + 38, 700, y + 38, LINE, 1, ' stroke-opacity=".3"'),
+        ]
+    for r, (rev, desc) in enumerate(REVISIONS):
+        y = 156 + r * 74
+        color = RED if rev == "C" else LINE
+        b.append(f'<path d="M796 {y + 18} L810 {y + 42} L782 {y + 42} Z" fill="none" stroke="{color}" stroke-width="1.5"/>'
+                 + text(796, y + 39, rev, 12, "din", anchor="middle", fill=color))
+        for j, s in enumerate(desc):
+            b.append(text(830, y + 30 + j * 22, s, 14.5, fill=LINE if rev == "C" else SOFT))
+        if r < len(REVISIONS) - 1:
+            b.append(line(770, y + 74, 1140, y + 74, LINE, 1, ' stroke-opacity=".3"'))
+    yc = 156 + 2 * 74
+    b += [cloud(774, yc + 6, 362, 64), text(1126, yc + 52, "CURRENT", 11, fill=AMBER, ls=1.6, anchor="end")]
+    return sheet(W, H, "\n".join(b), "Bill of materials and revision history")
+
+
+def end():
+    W, H = 1200, 104
+    b = [
+        text(60, 60, f"END OF DRAWING SET  ·  {SHEETS:02d} SHEETS", 13, fill=MUTED, ls=2.2, extra=' xml:space="preserve"'),
+        f'<text x="1140" y="60" class="mono" font-size="15" fill="{LINE}" text-anchor="end" letter-spacing="1.6">'
+        f'QUESTIONS <tspan fill="{AMBER}">→</tspan> ME@LORDAMDAL.COM</text>',
+    ]
+    return sheet(W, H, "\n".join(b), "End of drawing set. Questions: me@lordamdal.com", zones=False)
+
+
+# ---------------------------------------------------------------- buttons
+
+def button(tag, value):
+    """Two-cell tag like a title-block entry: amber key, blueprint value."""
+    kw = mono_w(tag, 13, 2) + 26
+    vw = mono_w(value, 15, 0.5) + 34
+    w, h = kw + vw, 46
+    body = (f'<rect x="1" y="1" width="{w:.0f}" height="{h}" fill="{BG}" stroke="{LINE}" stroke-width="1.5"/>'
+            f'<rect x="1" y="1" width="{kw:.0f}" height="{h}" fill="{AMBER}" stroke="{LINE}" stroke-width="1.5"/>'
+            + text(round(1 + kw / 2 + 1, 1), 29, tag, 13, fill=BG, ls=2, anchor="middle", extra=' font-weight="700"')
+            + text(round(1 + kw + vw / 2, 1), 30, value, 15, fill=LINE, ls=0.5, anchor="middle"))
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w + 2:.0f}" height="{h + 2}" viewBox="0 0 {w + 2:.0f} {h + 2}" role="img">
+<title>{escape(tag)}: {escape(value)}</title>
+<style>{CSS}</style>
 {body}
 </svg>
 """
 
 
-def panel(w, h, body, title, bg=PAPER, extra_css=""):
-    inner = f"""<g clip-path="url(#clip)">
-<rect width="{w}" height="{h}" fill="{bg}"/>
-{body}
-<rect width="{w}" height="{h}" filter="url(#grain)"/>
-</g>
-<rect x="1.5" y="1.5" width="{w - 3}" height="{h - 3}" rx="18" fill="none" stroke="{INK}" stroke-width="3"/>"""
-    return svg(w, h, inner, title, extra_css)
-
-
-def tag(x, y, label, fill=CARD, color=INK, size=13, ls=3.0, tilt=-1.5):
-    """The boxed mono kicker that opens each section ("00 / TWO WAYS IN")."""
-    w = mono_w(label, size, ls) + 34
-    return f"""<g transform="rotate({tilt} {x} {y})">
-<rect x="{x + 4}" y="{y + 4}" width="{w:.0f}" height="36" fill="{INK}"/>
-<rect x="{x}" y="{y}" width="{w:.0f}" height="36" fill="{fill}" stroke="{INK}" stroke-width="2.5"/>
-<text x="{x + 17}" y="{y + 23}" class="mono" font-size="{size}" font-weight="700" letter-spacing="{ls}" fill="{color}">{escape(label)}</text>
-</g>"""
-
-
-def heading(x, y, text, size, key, color=INK, ls=None):
-    ls = -0.045 * size if ls is None else ls
-    return (f'<text id="{key}" x="{x}" y="{y}" class="sans" font-size="{size}" font-weight="900" '
-            f'letter-spacing="{ls:.2f}" fill="{color}"{pinned(key)}>{escape(text)}</text>')
-
-
-def highlight(x, y, text, size, key, fill, color):
-    """A heading word on a torn strip of paint, like HANDS on the site."""
-    w = WIDTHS.get(key, mono_w(text, size) * 1.05)
-    return (f'<rect x="{x - 10}" y="{y - size * 0.8:.0f}" width="{w + 22:.0f}" height="{size * 0.94:.0f}" '
-            f'fill="{fill}" filter="url(#torn)"/>' + heading(x, y, text, size, key, color))
-
-
-def wash_sun(tx, ty, s=1.0, opacity=1.0):
-    return f"""<g transform="translate({tx} {ty}) scale({s})" opacity="{opacity}">
-<path d="M300 44 C400 8 530 52 580 148 C632 248 618 372 528 448 C438 524 300 540 206 486 C104 428 44 316 62 208 C80 100 196 82 300 44 Z" fill="{NAPLES}" opacity=".82" filter="url(#soft)"/>
-<path d="M336 132 C412 108 486 158 502 236 C520 320 470 396 392 420 C310 446 224 404 202 330 C180 254 240 162 336 132 Z" fill="{CORAL}" opacity=".8" filter="url(#edge)"/>
-<path d="M360 190 C420 176 470 214 474 266 C478 322 436 360 380 362 C322 364 290 322 292 272 C294 226 318 200 360 190 Z" fill="{ROSE}" opacity=".7" filter="url(#edge)"/>
-</g>"""
-
-
-def wash_pool(tx, ty, s=1.0, opacity=0.62):
-    return f"""<g transform="translate({tx} {ty}) scale({s})" opacity="{opacity}">
-<path d="M262 26 C368 6 458 84 478 186 C500 296 438 412 330 452 C218 494 92 440 54 340 C16 240 66 118 160 62 C196 40 222 34 262 26 Z" fill="{TEAL}" filter="url(#soft)"/>
-</g>"""
-
-
-def wash_dusk(tx, ty, s=1.0):
-    return f"""<g transform="translate({tx} {ty}) scale({s})">
-<path d="M234 18 C330 4 424 66 442 156 C462 252 396 330 296 342 C190 356 78 306 50 218 C24 134 108 40 234 18 Z" fill="{VIOLET}" opacity=".5" filter="url(#soft)"/>
-<path d="M252 96 C316 86 366 128 368 184 C370 244 318 282 256 282 C194 282 148 240 150 184 C152 132 196 104 252 96 Z" fill="{VIRIDIAN}" opacity=".42" filter="url(#edge)"/>
-</g>"""
-
-
-# ---------------------------------------------------------------- hero
-
-def hero():
-    W, H = 1200, 630
-    pill = "AI ENGINEER · BUILDING AGENTS"
-    pill_w = 42 + mono_w(pill, 13, 2.6) + 16
-    nav = "".join(
-        f'<tspan dx="{0 if i == 0 else 30}">{t}</tspan>'
-        for i, t in enumerate(["BROWSER AGENTS", "INFERENCE", "ASSISTANTS"])
-    )
-    sub = [
-        [("Hi, I'm ", 0), ("Ahmed Ali", 1), (". I build AI agents that work in the", 0)],
-        [("software you already use — ", 0), ("your browser, your inbox,", 1)],
-        [("your week", 1), (" — and I make the models behind them", 0)],
-        [("cheaper to run", 1), (", without making them any worse.", 0)],
-    ]
-    sub_svg = "".join(
-        f'<text x="60" y="{466 + i * 34}" class="sans" font-size="23" fill="{INK_SOFT}">'
-        + "".join(
-            f'<tspan font-weight="700" fill="{INK}">{escape(t)}</tspan>' if b else escape(t)
-            for t, b in line
-        )
-        + "</text>"
-        for i, line in enumerate(sub)
-    )
-
-    term_x, term_y, term_w, term_h = 698, 258, 458, 262
-    lines = [
-        ("› what are you building right now?", INK, 700),
-        ("→ a browser agent that drives real Chrome", INK_SOFT, 400),
-        ("→ inference that costs less per task", INK_SOFT, 400),
-        ("→ an assistant that runs my week", INK_SOFT, 400),
-        ("→ live at chromeboost.work ✓", VIRIDIAN, 700),
-    ]
-    term_lines = "".join(
-        f'<text class="mono l{i}" x="{term_x + 22}" y="{term_y + 82 + i * 31}" font-size="16" '
-        f'font-weight="{wt}" fill="{c}">{escape(t)}</text>'
-        for i, (t, c, wt) in enumerate(lines)
-    )
-    caret_y = term_y + 82 + len(lines) * 31
-    css = "".join(
-        f".l{i} {{ animation: in .45s ease-out {0.5 + i * 0.55:.2f}s backwards; }}\n" for i in range(1, len(lines))
-    ) + ".caret { animation: blink 1.1s steps(1) infinite; }\n"
-
-    body = f"""
-{wash_pool(-300, 150)}
-{wash_sun(690, -160, 0.92)}
-{wash_dusk(700, 300)}
-<path d="M690 196 C740 186 790 200 840 188 S930 170 990 176" fill="none" stroke="{ULTRA}" stroke-width="15" stroke-linecap="round" opacity=".5" filter="url(#edge)"/>
-<rect width="{W}" height="76" fill="{PAPER}"/>
-
-<rect x="59" y="23" width="38" height="38" fill="{INK}"/>
-<rect x="56" y="20" width="38" height="38" fill="{NAPLES}" stroke="{INK}" stroke-width="2.5"/>
-<path d="{BOLT}" transform="translate(63 27) scale(.375)" fill="{INK}"/>
-<text x="108" y="48" class="sans" font-size="25" font-weight="700" letter-spacing="-.6" fill="{INK}">Ahmed Ali</text>
-<text x="1144" y="45" text-anchor="end" class="mono" font-size="14" font-weight="700" letter-spacing="2.4" fill="{INK}">{nav}</text>
-<rect x="0" y="76" width="{W}" height="3" fill="{INK}"/>
-
-<g transform="rotate(-2 64 130)">
-<rect x="68" y="116" width="{pill_w:.0f}" height="34" fill="{INK}"/>
-<rect x="64" y="112" width="{pill_w:.0f}" height="34" fill="{TEAL}" stroke="{INK}" stroke-width="2.5"/>
-<path d="{BOLT}" transform="translate(79 120) scale(.28)" fill="{INK}"/>
-<text x="106" y="134" class="mono" font-size="13" font-weight="700" letter-spacing="2.6" fill="{INK}">{escape(pill)}</text>
-</g>
-
-{heading(58, 238, "AGENTS THAT", 88, "h1a")}
-{highlight(58, 322, "ACTUALLY", 88, "h1b", CORAL, CARD)}
-{heading(58 + WIDTHS.get("h1b", 430) + 26, 322, "DO", 88, "h1c")}
-{heading(58, 406, "THE WORK.", 88, "h1d")}
-{sub_svg}
-
-<rect x="{term_x + 8}" y="{term_y + 8}" width="{term_w}" height="{term_h}" fill="{INK}"/>
-<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffcf5"/><stop offset="1" stop-color="#efe8f4"/></linearGradient>
-<rect x="{term_x}" y="{term_y}" width="{term_w}" height="{term_h}" fill="url(#glass)" stroke="{INK}" stroke-width="3"/>
-<rect x="{term_x}" y="{term_y}" width="{term_w}" height="44" fill="{INK}"/>
-<circle cx="{term_x + 24}" cy="{term_y + 22}" r="6" fill="{CORAL}"/>
-<circle cx="{term_x + 42}" cy="{term_y + 22}" r="6" fill="{NAPLES}"/>
-<circle cx="{term_x + 60}" cy="{term_y + 22}" r="6" fill="{VIRIDIAN}"/>
-<text x="{term_x + 80}" y="{term_y + 27}" class="mono" font-size="12.5" font-weight="700" letter-spacing="2.6" fill="{CARD}">YOU → AHMED</text>
-<circle cx="{term_x + term_w - 66}" cy="{term_y + 22}" r="4" fill="{NAPLES}"/>
-<circle cx="{term_x + term_w - 52}" cy="{term_y + 22}" r="4" fill="#6b635a"/>
-<circle cx="{term_x + term_w - 38}" cy="{term_y + 22}" r="4" fill="#6b635a"/>
-<circle cx="{term_x + term_w - 24}" cy="{term_y + 22}" r="4" fill="#6b635a"/>
-{term_lines}
-<text x="{term_x + 22}" y="{caret_y}" class="mono" font-size="16" font-weight="700" fill="{INK}">›</text>
-<rect class="caret" x="{term_x + 42}" y="{caret_y - 14}" width="10" height="18" fill="{INK}"/>
-"""
-    return panel(W, H, body, "Ahmed Ali — agents that actually do the work", extra_css=css)
-
-
-# ---------------------------------------------------------------- marquee
-
-MARQUEE = [
-    "Browser agents", "Real clicks, real sessions", "Cheaper inference",
-    "Cost per task, not per token", "Personal assistants", "You approve what matters",
-    "Open source",
-]
-
-
-def marquee():
-    W, H = 1200, 60
-    seq = "".join(f"{t}   ✦   " for t in MARQUEE)
-    period = WIDTHS.get("marquee", 1500)
-    css = f".run {{ animation: slide {period / 42:.0f}s linear infinite; }}\n@keyframes slide {{ to {{ transform: translateX(-{period}px); }} }}\n"
-    copies = "".join(
-        f'<text{' id="marquee"' if i == 0 else ''} x="{i * period}" y="37" class="sans pre" xml:space="preserve" font-size="17" '
-        f'font-weight="700" fill="{INK}"{pinned("marquee")}>{escape(seq)}</text>'
-        for i in range(2)
-    )
-    body = f'<g class="run">{copies}</g>'
-    return panel(W, H, body, " · ".join(MARQUEE), bg=NAPLES, extra_css=css)
-
-
-# ---------------------------------------------------------------- now building
-
-PROJECTS = [
-    {
-        "color": CORAL, "num_color": CARD, "pill": "LIVE · CHROMEBOOST.WORK", "pill_fill": NAPLES,
-        "title": "WEB BROWSER AUTOMATION AGENT",
-        "lines": [
-            "Gives Claude hands in your own Chrome — your logins, real clicks, real keystrokes.",
-            "It reads, fills, drags and downloads; anything that posts, pays or deletes waits for you.",
-        ],
-        "chips": ["MCP server", "Chrome extension", "Claude Code", "Mac + Windows app", "MIT"],
-    },
-    {
-        "color": NAPLES, "num_color": INK, "pill": "IN THE LAB", "pill_fill": TEAL,
-        "title": "AI INFERENCE COST OPTIMISATION",
-        "lines": [
-            "Same answers, smaller bill. Finding where model spend actually goes and cutting it —",
-            "measured in cost per finished task, not cost per token, with quality held fixed.",
-        ],
-        "chips": ["cost / task", "latency", "tokens", "quality evals"],
-    },
-    {
-        "color": TEAL, "num_color": INK, "pill": "BUILDING", "pill_fill": CARD,
-        "title": "PERSONAL ASSISTANT AI AGENT",
-        "lines": [
-            "An assistant for the errands of a working week — the inbox, the calendar, the",
-            "follow-ups you'd forget. It does the legwork; you approve what leaves your name.",
-        ],
-        "chips": ["memory", "tool use", "scheduling", "human in the loop"],
-    },
-]
-
-
-def project_card(i, p, y):
-    x, w, h = 64, 1056, 214
-    pill_w = mono_w(p["pill"], 12, 2.4) + 32
-    chips, cx = [], x + 140
-    for c in p["chips"]:
-        cw = mono_w(c, 14.5, 0.4) + 22
-        chips.append(
-            f'<rect x="{cx:.0f}" y="{y + 162}" width="{cw:.0f}" height="31" rx="5" fill="{PAPER_2}" stroke="{INK}" stroke-width="1.5"/>'
-            f'<text x="{cx + cw / 2:.0f}" y="{y + 183}" text-anchor="middle" class="mono" font-size="14.5" letter-spacing=".4" fill="{INK}">{escape(c)}</text>'
-        )
-        cx += cw + 10
-    desc = "".join(
-        f'<text x="{x + 140}" y="{y + 114 + j * 30}" class="sans" font-size="20.5" fill="{INK_SOFT}">{escape(t)}</text>'
-        for j, t in enumerate(p["lines"])
-    )
-    return f"""
-<rect x="{x + 8}" y="{y + 8}" width="{w}" height="{h}" fill="{INK}"/>
-<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{CARD}" stroke="{INK}" stroke-width="3"/>
-<rect x="{x + 1.5}" y="{y + 1.5}" width="106.5" height="{h - 3}" fill="{p["color"]}"/>
-<rect x="{x + 107}" y="{y}" width="3" height="{h}" fill="{INK}"/>
-<text x="{x + 54}" y="{y + 120}" text-anchor="middle" class="mono" font-size="38" font-weight="700" fill="{p["num_color"]}">{i + 1:02d}</text>
-<rect x="{x + 140}" y="{y - 16}" width="{pill_w:.0f}" height="32" rx="16" fill="{p["pill_fill"]}" stroke="{INK}" stroke-width="2.5"/>
-<text x="{x + 156}" y="{y + 4.5}" class="mono" font-size="12" font-weight="700" letter-spacing="2.4" fill="{INK}">{escape(p["pill"])}</text>
-{heading(x + 140, y + 76, p["title"], 34, f"p{i}", ls=-1.2)}
-{desc}
-{"".join(chips)}"""
-
-
-def now():
-    W = 1200
-    top, step = 386, 266
-    H = top + step * (len(PROJECTS) - 1) + 214 + 64
-    cards = "".join(project_card(i, p, top + i * step) for i, p in enumerate(PROJECTS))
-    body = f"""
-{wash_sun(940, -190, 0.62, 0.9)}
-{wash_pool(-330, H - 300, 0.9, 0.5)}
-{tag(64, 52, "00 / NOW BUILDING")}
-{heading(60, 172, "ONE IDEA.", 66, "n1")}
-{heading(60, 238, "THREE WAYS IN.", 66, "n2")}
-<text x="62" y="292" class="sans" font-size="22" fill="{INK_SOFT}">The idea: AI that does <tspan font-weight="700" fill="{INK}">real work</tspan> for you — in your browser, across your week —</text>
-<text x="62" y="324" class="sans" font-size="22" fill="{INK_SOFT}">and costs little enough to run that you <tspan font-weight="700" fill="{INK}">actually leave it on.</tspan></text>
-{cards}
-"""
-    return panel(W, H, body, "Now building: a web browser automation agent, AI inference cost optimisation, and a personal assistant agent")
-
-
-# ---------------------------------------------------------------- toolbox
-
-TOOLBOX = [
-    ("AI / ML", [("Python", NAPLES), ("PyTorch", CORAL), ("TensorFlow", None), ("MCP", TEAL), ("Claude Code", None), ("Core ML", None)]),
-    ("APPS", [("TypeScript", TEAL), ("Node.js", None), ("React", None), ("Swift", None), ("Flutter", None), (".NET", None)]),
-    ("INFRA", [("Google Cloud ✓", NAPLES), ("AWS", None), ("Azure", None), ("Docker", None), ("Kubernetes", None), ("PostgreSQL", None), ("MongoDB", None)]),
-]
-
-
-def toolbox():
-    W = 1200
-    rows = []
-    for r, (label, items) in enumerate(TOOLBOX):
-        y = 196 + r * 62
-        rows.append(f'<text x="64" y="{y + 26}" class="mono" font-size="13" font-weight="700" letter-spacing="2.4" fill="{INK_SOFT}">{label}</text>')
-        x = 190
-        for name, fill in items:
-            w = mono_w(name, 17, 0.3) + 30
-            rows.append(
-                f'<rect x="{x + 3:.0f}" y="{y + 3}" width="{w:.0f}" height="40" fill="{INK}"/>'
-                f'<rect x="{x:.0f}" y="{y}" width="{w:.0f}" height="40" fill="{fill or CARD}" stroke="{INK}" stroke-width="2"/>'
-                f'<text x="{x + w / 2:.0f}" y="{y + 26}" text-anchor="middle" class="mono" font-size="17" font-weight="700" letter-spacing=".3" fill="{INK}">{escape(name)}</text>'
-            )
-            x += w + 14
-    H = 196 + 62 * len(TOOLBOX) + 36
-    body = f"""
-{wash_dusk(930, -70, 0.8)}
-{tag(64, 52, "01 / TOOLBOX", fill=NAPLES)}
-{heading(60, 166, "WHAT I REACH FOR.", 56, "t1")}
-{"".join(rows)}
-"""
-    tools = "; ".join(f"{label}: " + ", ".join(n for n, _ in items) for label, items in TOOLBOX)
-    return panel(W, H, body, f"Toolbox — {tools}")
-
-
-# ---------------------------------------------------------------- footer
-
-def footer():
-    W, H = 1200, 340
-    contact = "".join(
-        f'<tspan dx="{0 if i == 0 else 22}">{escape(t)}</tspan>'
-        for i, t in enumerate(["ME@LORDAMDAL.COM", "✦", "@THEAMDAL ON X", "✦", "IN/LORDAMDAL"])
-    )
-    body = f"""
-{wash_sun(860, -40, 0.8, 0.95)}
-<g transform="rotate(-1.5 64 52)">
-<rect x="64" y="52" width="{mono_w("02 / SAY HELLO", 13, 3) + 34:.0f}" height="36" fill="none" stroke="{NAPLES}" stroke-width="2.5"/>
-<text x="81" y="75" class="mono" font-size="13" font-weight="700" letter-spacing="3" fill="{NAPLES}">02 / SAY HELLO</text>
-</g>
-{heading(60, 172, "GOT A JOB FOR AN AGENT?", 60, "f1", color=CARD)}
-{highlight(60, 246, "LET'S TALK.", 60, "f2", NAPLES, INK)}
-<text x="62" y="300" class="mono" font-size="14" font-weight="700" letter-spacing="2.4" fill="{NAPLES}">{contact}</text>
-"""
-    return panel(W, H, body, "Got a job for an agent? Let's talk — me@lordamdal.com, @theamdal on X", bg=INK)
-
-
-# ---------------------------------------------------------------- buttons
-
-def button(label, fill, color, shadow=INK):
-    size, ls = 15, 2.6
-    w = mono_w(label, size, ls) + 56
-    body = f"""<rect x="7.5" y="7.5" width="{w:.0f}" height="50" fill="{shadow}"/>
-<rect x="1.5" y="1.5" width="{w:.0f}" height="50" fill="{fill}" stroke="{INK}" stroke-width="3"/>
-<text x="{1.5 + w / 2 + ls / 2:.1f}" y="32" text-anchor="middle" class="mono" font-size="{size}" font-weight="700" letter-spacing="{ls}" fill="{color}">{escape(label)}</text>"""
-    return svg(round(w + 9), 60, body, label)
-
-
 BUTTONS = {
-    "btn-email": ("ME@LORDAMDAL.COM", CORAL, INK),
-    "btn-x": ("@THEAMDAL ON X", INK, NAPLES),
-    "btn-linkedin": ("LINKEDIN", CARD, INK),
-    "btn-site": ("CHROMEBOOST.WORK ↗", CARD, INK),
-    "btn-repo": ("★ CHROMEBOOST ON GITHUB", INK, NAPLES),
-    "btn-gcp": ("GOOGLE CLOUD PROFILE ↗", CARD, INK),
+    "btn-email": ("MAIL", "me@lordamdal.com"),
+    "btn-x": ("X", "@theamdal"),
+    "btn-linkedin": ("IN", "linkedin/lordamdal"),
+    "btn-site": ("WEB", "chromeboost.work"),
+    "btn-repo": ("REPO", "lordamdal/chromeboost"),
+    "btn-gcp": ("GCP", "cloud skills profile"),
 }
 
 
 def main():
-    pages = {"hero": hero(), "marquee": marquee(), "now": now(), "toolbox": toolbox(), "footer": footer()}
+    pages = {"hero": hero(), "bom": bom(), "end": end()}
+    for ref, n, title, st, notes, draw in DETAILS:
+        pages[f"detail-{ref.lower()}"] = detail(ref, n, title, st, notes, draw())
     pages.update({name: button(*args) for name, args in BUTTONS.items()})
-    # GitHub's dark theme swallows ink shadows, so <picture> swaps in these
-    pages.update({f"{name}-dark": button(*args, shadow=PAPER_3) for name, args in BUTTONS.items()})
     for name, content in pages.items():
         (OUT / f"{name}.svg").write_text(content, encoding="utf-8")
         print(f"wrote assets/{name}.svg")
