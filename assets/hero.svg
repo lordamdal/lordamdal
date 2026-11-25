@@ -1,109 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1212" height="732" viewBox="0 0 1212 732" role="img">
-<title>Ahmed Ali — AI engineer. I build AI agents that do real work, and make them cheap enough to leave running.</title>
-<defs><filter id="imp" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="720" color-interpolation-filters="sRGB">
-  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.06" numOctaves="4" seed="3" result="bristle"/>
-  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="9" result="blob"/>
-  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
-  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
-  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
-  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
-  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
-  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
-  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
-  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
-  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
-  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
-  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
-</filter>
-<filter id="imp-v" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="720" color-interpolation-filters="sRGB">
-  <feTurbulence type="fractalNoise" baseFrequency="0.06 0.012" numOctaves="4" seed="3" result="bristle"/>
-  <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="9" result="blob"/>
-  <feDisplacementMap in="SourceGraphic" in2="blob" scale="24" xChannelSelector="R" yChannelSelector="G" result="paint"/>
-  <feGaussianBlur in="paint" stdDeviation="6" result="soft"/>
-  <feColorMatrix in="bristle" type="luminanceToAlpha" result="ridges"/>
-  <feComposite in="ridges" in2="paint" operator="in" result="ridgesIn"/>
-  <feComposite in="ridgesIn" in2="soft" operator="arithmetic" k2=".75" k3=".65" result="height"/>
-  <feDiffuseLighting in="height" surfaceScale="10" diffuseConstant="1.3" lighting-color="#fff" result="diffuse"><feDistantLight azimuth="235" elevation="40"/></feDiffuseLighting>
-  <feSpecularLighting in="height" surfaceScale="10" specularConstant=".9" specularExponent="28" lighting-color="#fff" result="spec"><feDistantLight azimuth="235" elevation="40"/></feSpecularLighting>
-  <feComposite in="paint" in2="diffuse" operator="arithmetic" k1="1.12" result="lit"/>
-  <feComposite in="lit" in2="paint" operator="in" result="litIn"/>
-  <feComposite in="spec" in2="paint" operator="in" result="specIn"/>
-  <feComposite in="specIn" in2="litIn" operator="arithmetic" k2=".55" k3="1"/>
-</filter>
-<filter id="gouache" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="720" color-interpolation-filters="sRGB">
-  <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="11" result="t"/>
-  <feDisplacementMap in="SourceGraphic" in2="t" scale="30" xChannelSelector="R" yChannelSelector="G" result="shape"/>
-  <feTurbulence type="fractalNoise" baseFrequency="0.05 0.012" numOctaves="3" seed="4" result="streak"/>
-  <feColorMatrix in="streak" type="saturate" values="0" result="g"/>
-  <feComposite in="shape" in2="g" operator="arithmetic" k2="1" k3=".22" k4="-.11" result="mix"/>
-  <feComposite in="mix" in2="shape" operator="in"/>
-</filter>
-<filter id="torn" x="-5%" y="-30%" width="110%" height="160%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.18" numOctaves="2" seed="7" result="t"/>
-  <feDisplacementMap in="SourceGraphic" in2="t" scale="7" xChannelSelector="R" yChannelSelector="G"/>
-</filter>
-<filter id="grain" x="0" y="0" width="100%" height="100%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="5" stitchTiles="stitch"/>
-  <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .22 0 0 0 -.07"/>
-</filter><clipPath id="wall"><rect x="2.5" y="2.5" width="1195" height="715" rx="18"/></clipPath></defs>
-<style>
-.poster { font-family: 'Helvetica Neue', 'Arial Narrow', Impact, Haettenschweiler, sans-serif; font-stretch: condensed; font-weight: 900; }
-.sans { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-.bold { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; }
-.mono { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; }
-</style>
-<rect x="12" y="12" width="1200" height="720" rx="20" fill="#141414"/>
-<g clip-path="url(#wall)">
-<rect width="1200" height="720" fill="#ff8fb6"/>
-
-<g filter="url(#gouache)"><path d="M760 -80 C960 -10 1190 60 1280 280 L1280 -80 Z" fill="#7b5cff"/><circle cx="1070" cy="660" r="210" fill="#19c3a6"/><circle cx="640" cy="50" r="70" fill="#7fd3ff"/></g>
-<g filter="url(#imp)"><path d="M-60 610 C260 530 640 340 1260 150" fill="none" stroke="#1f3fd1" stroke-width="150" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 400 C180 372 380 392 600 360" fill="none" stroke="#ffd21f" stroke-width="140" stroke-linecap="round" stroke-linejoin="round"/><path d="M880 140 C960 90 1050 120 1070 190" fill="none" stroke="#ff3b1f" stroke-width="130" stroke-linecap="round" stroke-linejoin="round"/><path d="M720 660 C800 640 880 668 960 645" fill="none" stroke="#fdf6e6" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/><path d="M690 214 C705 204 720 208 738 218" fill="none" stroke="#b6f03a" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 676 C120 660 200 684 290 664" fill="none" stroke="#ff4f8b" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/></g>
-<text x="52" y="252" class="poster" font-size="220" fill="#141414" id="hero-1" textLength="651.6" lengthAdjust="spacingAndGlyphs">AHMED</text>
-<text x="52" y="462" class="poster" font-size="220" fill="#141414" id="hero-2" textLength="338.6" lengthAdjust="spacingAndGlyphs">ALI.</text>
-<g transform="rotate(2 967.0 400.0)">
-<rect x="794" y="260" width="366" height="300" rx="4" fill="#141414"/><rect x="784" y="250" width="366" height="300" rx="4" fill="#fffaf0" stroke="#141414" stroke-width="5"/>
-<text x="812" y="314" class="poster" font-size="46" fill="#141414" id="hero-hi" textLength="276.1" lengthAdjust="spacingAndGlyphs">HI, I'M AHMED.</text>
-<text x="812" y="356" class="sans" font-size="22" fill="#141414">I build AI agents that do</text><text x="812" y="388" class="sans" font-size="22" fill="#141414"><tspan font-weight="700">real work</tspan> — in your browser,</text><text x="812" y="420" class="sans" font-size="22" fill="#141414">across your week — and I</text><text x="812" y="452" class="sans" font-size="22" fill="#141414">make them <tspan font-weight="700">cheap enough</tspan></text><text x="812" y="484" class="sans" font-size="22" fill="#141414">to leave running.</text>
-<g transform="rotate(38 1130 256)" filter="url(#torn)"><rect x="1080.0" y="241" width="100" height="30" fill="#f2e6c4" fill-opacity=".9"/><rect x="1080.0" y="241" width="100" height="30" fill="none" stroke="#fff" stroke-opacity=".35" stroke-dasharray="2 9"/></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="516" viewBox="0 0 1216 516" role="img">
+<title>Amdal, ai engineer. I give AI hands, a voice and eyes. Agents that work where people already are: in the browser, out loud, on camera.</title>
+<style>.d { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; } .s { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; } .m { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; font-weight: 400; } .mb { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }</style>
+<g transform="translate(3 3)">
+<rect x="-3" y="-3" width="1206" height="506" fill="#ffffff"/><rect x="7" y="7" width="1206" height="506" fill="#ffffff"/><rect x="10" y="10" width="1200" height="500" fill="#111111"/>
+<rect width="1200" height="500" fill="#f6f2e9"/>
+<text x="60" y="62" class="d" font-size="34" fill="#111111" letter-spacing="1">AMDAL</text>
+<text x="1140" y="59" class="mb" font-size="17" fill="#111111" text-anchor="end" letter-spacing="2.5">AI ENGINEER</text>
+<rect y="96" width="1200" height="5" fill="#111111"/>
+<rect x="467.8" y="194" width="303.1" height="44" fill="#111111"/><rect x="461.8" y="188" width="303.1" height="44" fill="#ffd400"/><text x="60" y="222" class="d" font-size="108" fill="#111111" letter-spacing="-3" textLength="735.9" lengthAdjust="spacingAndGlyphs">I give AI hands,</text><rect x="144" y="318" width="263" height="44" fill="#111111"/><rect x="138" y="312" width="263" height="44" fill="#ffd400"/><rect x="640.1" y="318" width="230" height="44" fill="#111111"/><rect x="634.1" y="312" width="230" height="44" fill="#ffd400"/><text x="60" y="346" class="d" font-size="108" fill="#111111" letter-spacing="-3" textLength="835.1" lengthAdjust="spacingAndGlyphs">a voice and eyes.</text>
+<text x="60" y="438" class="s" font-size="26" fill="#111111">Agents that work where people already are: in the browser, out loud, on camera.</text>
+<rect x="2.5" y="2.5" width="1195" height="495" fill="none" stroke="#111111" stroke-width="5"/>
 </g>
-<g transform="rotate(-4 879.6 243.5)">
-<rect x="796.0" y="218.0" width="167.3" height="51" rx="10" fill="#fff"/>
-<rect x="807.0" y="229.0" width="155.3" height="39" rx="6" fill="#141414"/>
-<rect x="802.0" y="224.0" width="155.3" height="39" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
-<text x="818" y="248.9" class="bold" font-size="15" fill="#ffd21f" letter-spacing="2.4" id="k-hero" textLength="123.3" lengthAdjust="spacingAndGlyphs">AI ENGINEER</text>
-</g>
-<g transform="rotate(-12 1078 120)">
-<circle cx="1078" cy="120" r="82" fill="#fff"/>
-<circle cx="1085" cy="127" r="74" fill="#141414"/>
-<circle cx="1078" cy="120" r="74" fill="#ffd21f" stroke="#141414" stroke-width="4"/>
-<path id="rim" d="M1024 120 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0" fill="none"/>
-<text class="bold" font-size="14" fill="#141414" letter-spacing="2"><textPath href="#rim" textLength="333" lengthAdjust="spacing">WORKS IN PROGRESS ✶ 2026 ✶ </textPath></text>
-<text x="1078" y="136" class="poster" font-size="46" fill="#141414" text-anchor="middle" id="badge" textLength="72.5" lengthAdjust="spacingAndGlyphs">WIP</text>
-</g>
-<g transform="rotate(-2 145.3 557.0)">
-<rect x="50.0" y="532.0" width="190.6" height="50" rx="10" fill="#fff"/>
-<rect x="61.0" y="543.0" width="178.6" height="38" rx="6" fill="#141414"/>
-<rect x="56.0" y="538.0" width="178.6" height="38" rx="6" fill="#141414" stroke="#141414" stroke-width="3.5"/>
-<text x="72" y="562.04" class="bold" font-size="14" fill="#ffd21f" letter-spacing="2.2" id="k-now" textLength="146.6" lengthAdjust="spacingAndGlyphs">NOW SHOWING ↓</text>
-</g>
-<g transform="rotate(1.5 157.1 623.0)">
-<rect x="50.0" y="594.0" width="214.2" height="58" rx="10" fill="#fff"/>
-<rect x="61.0" y="605.0" width="202.2" height="46" rx="6" fill="#141414"/>
-<rect x="56.0" y="600.0" width="202.2" height="46" rx="6" fill="#1f3fd1" stroke="#141414" stroke-width="3.5"/>
-<text x="72" y="628.4" class="bold" font-size="15" fill="#fdf6e6" letter-spacing="1" id="chip0" textLength="170.2" lengthAdjust="spacingAndGlyphs">01 BROWSER AGENT</text>
-</g><g transform="rotate(-1.5 377.4 623.0)">
-<rect x="270.2" y="594.0" width="214.4" height="58" rx="10" fill="#fff"/>
-<rect x="281.2" y="605.0" width="202.4" height="46" rx="6" fill="#141414"/>
-<rect x="276.2" y="600.0" width="202.4" height="46" rx="6" fill="#ff3b1f" stroke="#141414" stroke-width="3.5"/>
-<text x="292.2" y="628.4" class="bold" font-size="15" fill="#fdf6e6" letter-spacing="1" id="chip1" textLength="170.4" lengthAdjust="spacingAndGlyphs">02 INFERENCE COST</text>
-</g><g transform="rotate(1 617.9 623.0)">
-<rect x="490.6" y="594.0" width="254.5" height="58" rx="10" fill="#fff"/>
-<rect x="501.6" y="605.0" width="242.5" height="46" rx="6" fill="#141414"/>
-<rect x="496.6" y="600.0" width="242.5" height="46" rx="6" fill="#19c3a6" stroke="#141414" stroke-width="3.5"/>
-<text x="512.6" y="628.4" class="bold" font-size="15" fill="#141414" letter-spacing="1" id="chip2" textLength="210.5" lengthAdjust="spacingAndGlyphs">03 PERSONAL ASSISTANT</text>
-</g>
-
-<rect width="1200" height="720" filter="url(#grain)"/>
-</g>
-<rect x="2.5" y="2.5" width="1195" height="715" rx="18" fill="none" stroke="#141414" stroke-width="5"/>
 </svg>

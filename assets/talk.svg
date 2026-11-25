@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="300" viewBox="0 0 1216 300" role="img">
+<title>Let's talk. If you're building agents that touch the real world, or you've answered one of these better than I have, I'd like to compare notes. Email me@lordamdal.com.</title>
+<style>.d { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; } .s { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; } .m { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; font-weight: 400; } .mb { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }</style>
+<g transform="translate(3 3)">
+<rect x="-3" y="-3" width="1206" height="290" fill="#ffffff"/><rect x="7" y="7" width="1206" height="290" fill="#ffffff"/><rect x="10" y="10" width="1200" height="284" fill="#111111"/>
+<rect width="1200" height="284" fill="#ffd400"/>
+<rect width="168" height="284" fill="#ffd400"/><rect x="168" width="5" height="284" fill="#111111"/><text x="84" y="148" class="mb" font-size="15" fill="#111111" text-anchor="middle" letter-spacing="2.5">LET'S TALK</text>
+<text x="211" y="78" class="d" font-size="30" fill="#111111" letter-spacing="-0.5">If you're building agents that touch the real world,</text><text x="211" y="120" class="d" font-size="30" fill="#111111" letter-spacing="-0.5">or you've answered one of these better than I have,</text><text x="211" y="162" class="d" font-size="30" fill="#111111" letter-spacing="-0.5">I'd like to compare notes.</text>
+<rect x="217" y="198" width="266.1" height="54" fill="#111111"/><rect x="213" y="194" width="262.1" height="50" fill="#f6f2e9" stroke="#111111" stroke-width="4"/>
+<text x="233" y="225.48" class="mb" font-size="18" fill="#111111" letter-spacing="1.5" textLength="222.1" lengthAdjust="spacingAndGlyphs">ME@LORDAMDAL.COM →</text>
+<rect x="2.5" y="2.5" width="1195" height="279" fill="none" stroke="#111111" stroke-width="5"/>
+</g>
+</svg>

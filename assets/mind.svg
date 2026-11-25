@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="220" viewBox="0 0 1216 220" role="img">
+<title>On my mind: How much should an agent do in your real accounts before it asks? How fast must a voice agent answer before it stops feeling like a machine? What does one finished task really cost when an agent does it?</title>
+<style>.d { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; } .s { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; } .m { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; font-weight: 400; } .mb { font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }</style>
+<g transform="translate(3 3)">
+<rect x="-3" y="-3" width="1206" height="210" fill="#ffffff"/><rect x="7" y="7" width="1206" height="210" fill="#ffffff"/><rect x="10" y="10" width="1200" height="204" fill="#111111"/>
+<rect width="1200" height="204" fill="#f6f2e9"/>
+<rect width="168" height="204" fill="#f6f2e9"/><rect x="168" width="5" height="204" fill="#111111"/><text x="84" y="108" class="mb" font-size="15" fill="#111111" text-anchor="middle" letter-spacing="2.5">ON MY MIND</text>
+<rect x="212.5" y="57.5" width="11" height="11" fill="#ffd400" stroke="#111111" stroke-width="3"/><text x="243" y="70" class="s" font-size="22" fill="#111111">How much should an agent do in your real accounts before it asks?</text><rect x="212.5" y="103.5" width="11" height="11" fill="#ffd400" stroke="#111111" stroke-width="3"/><text x="243" y="116" class="s" font-size="22" fill="#111111">How fast must a voice agent answer before it stops feeling like a machine?</text><rect x="212.5" y="149.5" width="11" height="11" fill="#ffd400" stroke="#111111" stroke-width="3"/><text x="243" y="162" class="s" font-size="22" fill="#111111">What does one finished task really cost when an agent does it?</text>
+<rect x="2.5" y="2.5" width="1195" height="199" fill="none" stroke="#111111" stroke-width="5"/>
+</g>
+</svg>
